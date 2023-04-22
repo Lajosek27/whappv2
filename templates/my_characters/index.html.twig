@@ -4,19 +4,16 @@
 
 {% block body %}
 <div class="container-lg">
-    <div id="myCharacterList">
+    <div id="characterList">
         <div class="header"><h1>Lista postaci</h1></div>
         <div class="content">
         {# {{ dump(characters) }} #}
         {% for character in characters %}
-            <div class="character">
-                <a href='#' class="d-flex">
-                    <div class="characterImg col-3"></div>
-                    <div class="characterInfo">
-                        <div class="characterImg"><h1>{{ character.name }}</h1></div>
-
-                    </div>
-                </a>
+            <div class="character d-flex">
+                <div class="characterImg"><a href='#' class="d-flex"><img src="{{asset("img/base-character-portrait.png")}}"></a></div>
+                <div class="characterInfo">
+                    <div class="characterName"><a href='#'><p>{{ character.name }}</p></a></div>
+                </div>
             </div>
         {% endfor %}
         </div>

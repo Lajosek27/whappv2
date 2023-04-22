@@ -12,18 +12,31 @@ body{
    background-color: var(--background);
    color: #f1f1f1;
 }
-a{
-    color:var(--main);
-    text-decoration: none;
-    -webkit-transition: all 0.3s linear;
-    -moz-transition: all 0.3s linear;
-    -ms-transition: all 0.3s linear;
-    -o-transition: all 0.3s linear;
+a:not(a > button){
+    background: var(--second);
+    background: -moz-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    background: -webkit-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    background: linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="var(--second)",endColorstr="var(--main)",GradientType=1);
+    background-size: 200% 100%;
+    background-position: -100%;
+    display: inline-block;
+    padding: 5px 0;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     transition: all 0.3s linear;
-}
-a:hover{
-    color:var(--second)
-}
+  }
+  a:hover {
+   background-position: 0;
+  }
+  
+  a:hover::before {
+    width:100%;
+  }
+
+.sf-toolbar a{-webkit-text-fill-color:#fff;padding:0}
+
 header{
     background-color: var(--background-secound);
     margin-bottom:20px;
@@ -35,6 +48,7 @@ header{
     padding: 5px 30px;
     letter-spacing: 2px;
     text-transform: uppercase;
+    -webkit-text-fill-color: initial;
 }
 .btn-primary{
     background-color: var(--main);
@@ -48,13 +62,50 @@ header{
     border-color:var(--second);
 }
 /*  Póki co będzie text*/
-header .navbar-brand,header .navbar-brand:hover{color:#f1f1f1}
+header .navbar-brand,header .navbar-brand:hover{-webkit-text-fill-color:#fff;}
+
 header .nav-link{
     color:var(--white);
 }
-header .nav-link:hover{
-
+header .navbar-nav{
+    display: flex;
+    gap:15px;
+    margin-left: 30px;
+}
+header .navbar-nav a{
+    font-size: 18px;
+    font-weight: 600;
 }
 body h1,body h2,body h3,body h4,body h5,body h6{
     font-family: 'Bebas Neue', cursive;
+}
+/* character list */
+#characterList{
+    background-color: var(--background-secound);
+    padding: 20px;
+    border-radius: 20px;
+}
+#characterList .content{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+}
+#characterList .character{
+    background-color: var(--background);
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+#characterList .characterImg {
+    width: 20%;
+}
+#characterList .characterImg img{
+    width: 200px;
+}
+#characterList .characterInfo {
+    padding: 0 20px;
+    width: 40%;
+}
+#characterList .characterInfo p{
+    font-size: 25px;
+    font-weight: 500;
 }
