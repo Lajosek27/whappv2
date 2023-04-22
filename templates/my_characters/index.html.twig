@@ -5,25 +5,58 @@
 {% block body %}
 <div class="container-lg">
     <div id="characterList">
-        <div class="header"><h1>Lista postaci</h1></div>
+        <div class="header"><h1>Moje Postaci</h1></div>
         <div class="content">
         {# {{ dump(characters) }} #}
-        {% for character in characters %}
+         {% for character in characters %}
             <div class="character d-flex">
                 <div class="characterImg"><a href='#' class="d-flex"><img src="{{asset("img/base-character-portrait.png")}}"></a></div>
                 <div class="characterInfo">
                     <div class="characterName"><a href='#'><p>{{ character.name }}</p></a></div>
+                    <div class="characterMoreInfo">
+                        <p>Rasa: Elf</p>
+                        <p>Profesja: Szlachcic</p>
+                        <p>Sciężka profesji: Szlachcic</p>
+                    </div>
+                </div>
+                <div class="characterMeta">
+                    
+                    {% if character.gameMaster and character.gameMaster.username is not empty %}
+                    <div>
+                        <h6>Pod opieką Mistrza:</h6>
+                        <h4 class="characterGameMaster">{{character.gameMaster.username}}</h4>
+                    </div>
+                    {% endif %}
+                     
+                </div>
+                <div class="characterSheet">
+                    <a href="#"><button class="btn btn-primary btn-lg">Karta Postaci</button></a>
                 </div>
             </div>
         {% endfor %}
         </div>
-        <div class="characterListNav">
-            {% if page > 1 %}
-            <a href="{{path('app_my_characters', { 'page' : page-1 })}}"><button type="submit" class="btn btn-primary">Poprzednia</button></a>
-            {% endif %}
-            {% if page < maxPage %}
-            <a href="{{path('app_my_characters', { 'page' : page+1 })}}"><button type="submit" class="btn btn-primary">Następna</button></a>
-            {% endif %}
+         <div class="characterListNav">
+           
+            <div class="nav-button-prev">
+                {% if page > 1 %}
+                <a href="{{path('app_my_characters', { 'page' : page-1 })}}"><button type="submit" class="btn btn-primary"><iconify-icon icon="material-symbols:arrow-right-alt"  width="30" rotate="180deg"></iconify-icon></button></a>
+                {% else %}
+                 <a><button type="submit" class="btn btn-primary" disabled><iconify-icon icon="material-symbols:arrow-right-alt"  width="30" rotate="180deg"></iconify-icon></button></a>
+                {% endif %}
+            </div>
+             <div class="navPageCounter">
+                <span>{{page}}</span>
+                <span>/</span>
+                <span>{{maxPage}}</span>
+            </div>
+            <div class="nav-button-next">
+                {% if page < maxPage %}
+                <a href="{{path('app_my_characters', { 'page' : page+1 })}}"><button type="submit" class="btn btn-primary"><iconify-icon icon="material-symbols:arrow-right-alt"  width="30"></iconify-icon></button></a>
+                {% else %}
+                <a><button type="submit" class="btn btn-primary" disabled><iconify-icon icon="material-symbols:arrow-right-alt"  width="30"></iconify-icon></button></a>
+                {% endif %}
+            </div>
+           
         </div>
     </div>
 
