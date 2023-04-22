@@ -18,7 +18,7 @@ class charactersService
     
     public function getCharactersToCatalog(int $page = 1)
     {   
-        $paged = $page <= 0 ? $_ENV['CATALOG_CHARACTER_PER_PAGE'] * 0 : $_ENV['CATALOG_CHARACTER_PER_PAGE'] * $page;
+        $paged = $page <= 1 ? $_ENV['CATALOG_CHARACTER_PER_PAGE'] * 0 : $_ENV['CATALOG_CHARACTER_PER_PAGE'] * ($page - 1);
 
         $qb = $this->menager->createQueryBuilder();
         $qb->select('c')
