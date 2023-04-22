@@ -16,16 +16,16 @@ class charactersService
         
     }
     
-    public function getCharactersToCatalog(int $page = 1)
+    public function getCharactersToCatalog(int $userId,int $page = 1)
     {   
         $paged = $page <= 1 ? $_ENV['CATALOG_CHARACTER_PER_PAGE'] * 0 : $_ENV['CATALOG_CHARACTER_PER_PAGE'] * ($page - 1);
-
+        
         $qb = $this->menager->createQueryBuilder();
         $qb->select('c')
             ->from('App\Entity\Character','c')
-            // ->where('c.isPrivate = 0 OR (c.isPrivate = 1 AND (c.player = :userId OR c.gameMaster = :userId))')
-            ->where('c.isPrivate = 0 ')
-            // ->setParameter('userId',1)
+            ->where('c.isPrivate = 0 OR (c.isPrivate = 1 AND (c.player = :userId OR c.gameMaster = :userId))')
+            ->setParameter('userId',$userId)
+            // ->where('c.isPrivate = 0 ')
             ->orderBy('c.name', 'ASC')
             ->setFirstResult( $paged )
             ->setMaxResults( $_ENV['CATALOG_CHARACTER_PER_PAGE'] )
@@ -37,6 +37,39 @@ class charactersService
            
         return  $query->execute();
     }
+
+    public function getUserCharacters(int $userId,string $type = 'all',int $page = 1)
+    {   
+        $paged = $page <= 1 ? $_ENV['CATALOG_CHARACTER_PER_PAGE'] * 0 : $_ENV['CATALOG_CHARACTER_PER_PAGE'] * ($page - 1);
+        
+        $qb = $this->menager->createQueryBuilder();
+        $qb->select('c')
+            ->from('App\Entity\Character','c')
+            ->orderBy('c.name', 'ASC')
+            ->setFirstResult( $paged )
+            ->setMaxResults( $_ENV['CATALOG_CHARACTER_PER_PAGE'] )
+            ;
+
+        switch($type)
+        {   
+            case 'player' :
+                $qb ->where('c.player = :userId');
+                break;
+            case 'gameMaster' :
+                $qb ->where('c.gameMaster = :userId');
+                break;    
+            default:
+                $qb ->where('c.player = :userId OR c.gameMaster = :userId');
+        }
+
+        $qb->setParameter('userId',$userId);
+        $this->setMaxNumPages($qb);
+            
+        $query = $qb->getQuery();
+           
+        return  $query->execute();
+    }
+
 
     private function setMaxNumPages($qb)
     {

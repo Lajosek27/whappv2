@@ -1,0 +1,60 @@
+:root{
+    --font-family-base: 'Montserrat';
+    --font-size-base:16px;
+    --font-weight-base:400;
+    --background:#121212;
+    --background-secound:#1F1B24;
+    --main:#BB86FC;
+    --second:#03DAC5;
+    --white:#f1f1f1;
+}
+body{
+   background-color: var(--background);
+   color: #f1f1f1;
+}
+a{
+    color:var(--main);
+    text-decoration: none;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -ms-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+}
+a:hover{
+    color:var(--second)
+}
+header{
+    background-color: var(--background-secound);
+    margin-bottom:20px;
+}
+.btn{
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.btn-primary{
+    background-color: var(--main);
+    color: var(--background);
+    border-color:var(--main);
+
+}
+.btn-primary:hover{
+    background-color: var(--second);
+    color: var(--background);
+    border-color:var(--second);
+}
+/*  Póki co będzie text*/
+header .navbar-brand,header .navbar-brand:hover{color:#f1f1f1}
+header .nav-link{
+    color:var(--white);
+}
+header .nav-link:hover{
+
+}
+body h1,body h2,body h3,body h4,body h5,body h6{
+    font-family: 'Bebas Neue', cursive;
+}

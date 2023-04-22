@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Katalog postaci{% endblock %}
+{% block title %}Moje postaci{% endblock %}
 
 {% block body %}
-
 <div class="container-lg">
-    <div id="catalogCharacterList">
+    <div id="myCharacterList">
         <div class="header"><h1>Lista postaci</h1></div>
         <div class="content">
         {# {{ dump(characters) }} #}
@@ -23,10 +22,10 @@
         </div>
         <div class="characterListNav">
             {% if page > 1 %}
-            <a href="{{path('app_catalog', { 'page' : page-1 })}}"><button type="submit" class="btn btn-primary">Poprzednia</button></a>
+            <a href="{{path('app_my_characters', { 'page' : page-1 })}}"><button type="submit" class="btn btn-primary">Poprzednia</button></a>
             {% endif %}
             {% if page < maxPage %}
-            <a href="{{path('app_catalog', { 'page' : page+1 })}}"><button type="submit" class="btn btn-primary">Następna</button></a>
+            <a href="{{path('app_my_characters', { 'page' : page+1 })}}"><button type="submit" class="btn btn-primary">Następna</button></a>
             {% endif %}
         </div>
     </div>
