@@ -24,6 +24,9 @@ class Character
     #[ORM\JoinColumn(nullable: false)]
     private ?user $player = null;
 
+    #[ORM\Column]
+    private ?bool $isPrivate = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class Character
     public function setPlayer(?user $player): self
     {
         $this->player = $player;
+
+        return $this;
+    }
+
+    public function isIsPrivate(): ?bool
+    {
+        return $this->isPrivate;
+    }
+
+    public function setIsPrivate(bool $isPrivate): self
+    {
+        $this->isPrivate = $isPrivate;
 
         return $this;
     }

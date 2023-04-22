@@ -47,6 +47,7 @@ class UserFixtures extends Fixture
        //characters
        $ruben= new Character();
        $ruben->setName('Ruben');
+       $ruben->setIsPrivate(true);
        $ruben->setPlayer(
             $this->entityManager->getRepository(User::class)->findOneBy(['username' => "admin"])
         );
@@ -54,6 +55,7 @@ class UserFixtures extends Fixture
 
        $Nebur= new Character();
        $Nebur->setName('Nebur');
+       $Nebur->setIsPrivate(0);
        $Nebur->setPlayer(
             $this->entityManager->getRepository(User::class)->findOneBy(['username' => "admin"])
         );
@@ -61,6 +63,7 @@ class UserFixtures extends Fixture
 
        $Ast= new Character();
        $Ast->setName('Ast');
+       $Ast->setIsPrivate(false);
        $Ast->setPlayer(
             $this->entityManager->getRepository(User::class)->findOneBy(['username' => "user"])
         );
