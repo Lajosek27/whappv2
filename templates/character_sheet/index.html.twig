@@ -19,7 +19,7 @@
                     <tbody>
                         <tr>
                             <td colspan="2"><label>Nazwa postaci:</label><span>{{character.name}}</span></td>
-                            <td><label>Rasa:</label><span>Krasnolud</span></td>
+                            <td><label>Rasa:</label><span>{{character.info.race}}</span></td>
                             <td><label>Klasa:</label><span>Wojownicy </span></td>
                         </tr>
                         <tr>
@@ -31,10 +31,10 @@
                             <td><label>Status:</label><span>Srebro 2</span></td>
                         </tr>
                         <tr>
-                            <td><label>Wiek:</label><span>21</span></td>
-                            <td><label>Wzrost:</label><span>201 cm</span></td>
-                            <td><label>Włosy:</label><span>Nefrytowo Czarne</span></td>
-                            <td><label>Oczy:</label><span>błękito-Niebieskie </span></td>
+                            <td><label>Wiek:</label><span>{{character.info.age}} lat</span></td>
+                            <td><label>Wzrost:</label><span>{{character.info.height}} cm</span></td>
+                            <td><label>Włosy:</label><span>{{character.info.hair}}</span></td>
+                            <td><label>Oczy:</label><span>{{character.info.eyes}}</span></td>
                         </tr>
                     </tbody>
                 </table>
