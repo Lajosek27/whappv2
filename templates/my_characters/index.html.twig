@@ -22,18 +22,40 @@
                         <p>Sciężka profesji: Szlachcic</p>
                     </div>
                 </div>
-                <div class="characterMeta">
+                
+                <div class="characterButtons">
+                    {% if app.user == character.player %}
+                        <a href="#"><button class="btn btn-primary btn-lg">Karta Postaci</button></a>
+                        <a href="#"><button class="btn btn-primary btn-lg">Rozwiń Postaci</button></a>
+                        <a href="#"><button class="btn btn-primary btn-lg">Usuń</button></a>
+                    {% endif %}
+                    {% if app.user == character.gameMaster %}
+                        <a href="#"><button class="btn btn-primary btn-lg">Karta Postaci</button></a>
+                        <a href="#"><button class="btn btn-primary btn-lg">Edytuj Postaci</button></a>
+                        <a href="#"><button class="btn btn-primary btn-lg">Porzuć</button></a>
+                    {% endif %}
+                </div>
+                 <div class="characterMeta">
                     
-                    {% if character.gameMaster and character.gameMaster.username is not empty %}
+                    {# {% if character.gameMaster and character.gameMaster.username is not empty %}
                     <div>
                         <h6>Pod opieką Mistrza:</h6>
                         <h4 class="characterGameMaster">{{character.gameMaster.username}}</h4>
                     </div>
+                    {% endif %} #}
+                    {% if app.user == character.player %}
+                        <div>
+                            <h6>Jesteś:</h6>
+                            <h4 class="characterPlayer">Graczem</h4>
+                        </div>
                     {% endif %}
-                     
-                </div>
-                <div class="characterSheet">
-                    <a href="#"><button class="btn btn-primary btn-lg">Karta Postaci</button></a>
+                    {# Będzie trzecia opcja włąscielem #}
+                    {% if app.user == character.gameMaster %}
+                    <div>
+                        <h6>Jesteś:</h6>
+                        <h4 class="characterGameMaster">Mistrzem Gry</h4>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}

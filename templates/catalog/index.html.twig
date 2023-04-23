@@ -23,6 +23,9 @@
                         <p>Sciężka profesji: Szlachcic</p>
                     </div>
                 </div>
+                <div class="characterButtons">
+                    <a href="{{path('app_character_sheet',{'characterId' : character.id})}}"><button class="btn btn-primary btn-lg">Karta Postaci</button></a>
+                </div>
                 <div class="characterMeta">
                     <div>
                         <h6>Należy do Gracza:</h6>
@@ -36,9 +39,7 @@
                     {% endif %}
                      
                 </div>
-                <div class="characterSheet">
-                    <a href="{{path('app_character_sheet',{'characterId' : character.id})}}"><button class="btn btn-primary btn-lg">Karta Postaci</button></a>
-                </div>
+                
             </div>
         {% endfor %}
         </div>
