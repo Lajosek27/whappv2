@@ -437,3 +437,7 @@ nav.menuBar{
 }
 #characterSheet #characterAttributes label:not(.text-center label){
     font-size: 13px;
+}
+#characterSheet #characterPoints label:not(.text-center label){
+    font-size: 15px;
+}
