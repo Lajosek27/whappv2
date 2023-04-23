@@ -4,6 +4,9 @@
 
 {% block body %}
 <div class="container-lg">
+    {% for error in app.flashes('error') %}
+     <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
     <div id="characterList">
         <div class="header"><h1>Moje Postaci</h1></div>
         <div class="content">

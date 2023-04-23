@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Karta Postaci {{character.name}}{% endblock %}
+
+{% block body %}
+<div class="container-lg">
+    {% for error in app.flashes('error') %}
+     <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
+    <div id="characterSheet">
+        <div class="sheetSection">
+            <div id="characterInfo">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="2"><label>Nazwa postaci:</label><span>{{character.name}}</span></td>
+                            <td><label>Rasa:</label><span>Krasnolud</span></td>
+                            <td><label>Klasa:</label><span>Wojownicy </span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><label>Profesja:</label><span>Wędrowny czarodziej</span></td>
+                            <td colspan="2"><label>Poziom profesji:</label><span>2</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><label>Ścieżka profesji:</label><span>Wędrowny czarodziej</span></td>
+                            <td><label>Status:</label><span>Srebro 2</span></td>
+                        </tr>
+                        <tr>
+                            <td><label>Wiek:</label><span>21</span></td>
+                            <td><label>Wzrost:</label><span>201 cm</span></td>
+                            <td><label>Włosy:</label><span>Nefrytowo Czarne</span></td>
+                            <td><label>Oczy:</label><span>błękito-Niebieskie </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="sheetSection">
+            <div id="characterAttributes">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="12" class="text-center"><label>Cechy</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><label></label></td>
+                           <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                         <tr>
+                            <td colspan="2"><label>Początkowa</label></td>
+                            <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                         <tr>
+                            <td colspan="2"><label>Rozwinięcia</label></td>
+                            <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                         <tr>
+                            <td colspan="2"><label>Aktualna</label></td>
+                            <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="characterPoints">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="12"><label>Cechy</label></td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+           
+    </div>
+
+  
+</div>
+{% endblock %}

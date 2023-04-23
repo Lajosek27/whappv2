@@ -231,3 +231,55 @@ body h1,body h2,body h3,body h4,body h5,body h6{
     margin-bottom: 5px;
     font-size: 16px;
 }
+/* characetr sheet */
+#characterSheet{
+    background-color: var(--background-secound);
+    padding: 20px;
+    border-radius: 30px;
+}
+#characterSheet .sheetSection {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 5px;
+}
+#characterSheet label{
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+#characterSheet span{
+    font-size: 20px;
+    font-weight: 400;
+}
+#characterSheet #characterInfo{
+    width: 100%;
+}
+#characterSheet table{
+    border-spacing: 2px;
+    border-collapse: initial;
+    width: 100%;
+    background: -moz-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    background: -webkit-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    background: linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="var(--second)",endColorstr="var(--main)",GradientType=1);
+    background-size: 200% 100%;
+    background-position: -100%;
+    -webkit-text-fill-color: var(--white);
+    transition: all 0.3s linear;
+}
+#characterSheet table:hover{
+    background-position: 0;
+}
+#characterSheet td{
+    padding: 5px 10px;
+    background-color: var(--background-secound);
+}
+#characterSheet #characterAttributes,#characterSheet #characterPoints{
+    width: 50%;
+}
+#characterSheet #characterAttributes span{
+    font-size: 16px;
+}
+#characterSheet #characterAttributes label:not(.text-center label){
+    font-size: 13px;
+}

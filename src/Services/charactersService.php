@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use App\Entity\Character;
 
 
 class charactersService
@@ -11,7 +12,7 @@ class charactersService
 
     private int $maxNumPages;
 
-    public function __construct(private EntityManagerInterface $menager)
+    public function __construct(private EntityManagerInterface $manager)
     {
         
     }
@@ -20,7 +21,7 @@ class charactersService
     {   
         $paged = $page <= 1 ? $_ENV['CATALOG_CHARACTER_PER_PAGE'] * 0 : $_ENV['CATALOG_CHARACTER_PER_PAGE'] * ($page - 1);
         
-        $qb = $this->menager->createQueryBuilder();
+        $qb = $this->manager->createQueryBuilder();
         $qb->select('c')
             ->from('App\Entity\Character','c')
             ->where('c.isPrivate = 0 OR (c.isPrivate = 1 AND (c.player = :userId OR c.gameMaster = :userId))')
@@ -42,7 +43,7 @@ class charactersService
     {   
         $paged = $page <= 1 ? $_ENV['CATALOG_CHARACTER_PER_PAGE'] * 0 : $_ENV['CATALOG_CHARACTER_PER_PAGE'] * ($page - 1);
         
-        $qb = $this->menager->createQueryBuilder();
+        $qb = $this->manager->createQueryBuilder();
         $qb->select('c')
             ->from('App\Entity\Character','c')
             ->orderBy('c.name', 'ASC')
@@ -82,6 +83,10 @@ class charactersService
         return $this->maxNumPages;
     }
     
+    public function getCharacter(int $characterId)
+    {
+        return $this->manager->getRepository(Character::class)->findOneBy(['id' => $characterId]);
+    }
 }
 
 ?>

@@ -12,7 +12,11 @@ class MyCharactersController extends AbstractController
     #[Route('/my/characters/{page}', name: 'app_my_characters', requirements: ['page' => '\d+'])]
     public function index(charactersService $characterGetter,int $page = 1): Response
     {   
-        if(!$this->getUser()){return $this->redirectToRoute('app_login');}
+        if(!$this->getUser())
+        {   
+            $this->addFlash('error', 'Nie posiadasz dostępu do rządanego zasobu :/');
+            return $this->redirectToRoute('app_login');
+        }
 
         $characters = $characterGetter->getUserCharacters(
             $this->getUser()->getId(),
