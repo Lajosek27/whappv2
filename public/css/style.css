@@ -116,122 +116,7 @@ header .navbar-nav a{
 body h1,body h2,body h3,body h4,body h5,body h6{
     font-family: 'Bebas Neue', cursive;
 }
-/* character list */
-#characterList{
-    background-color: var(--background-secound);
-    padding: 20px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-#characterList .content{
-    display: flex;
-    flex-direction: column;
-    gap:15px;
-    width: inherit;
-}
-#characterList .character{
-    background-color: var(--background);
-    padding: 10px 20px;
-    border-radius: 20px;
-    width: inherit;
-}
-#characterList .characterImg {
-    width: 20%;
-}
-#characterList .characterImg img{
-    width: 200px;
-}
-#characterList .characterInfo{
-    padding: 0 20px;
-    width: 30%;
-}
-#characterList .characterInfo p{
-    font-size: 25px;
-    font-weight: 500;
-}
-#characterList .characterMoreInfo p{
-    font-size: 16px;
-    font-weight: 400;
-    margin-bottom: 5px
-}
-#characterList .characterMeta{
-    padding: 0 20px;
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap:20px
-}
-#characterList .characterMeta > div{
-    width: 100%;
-}
-#characterList  .characterMeta .characterPlayer,
-#characterList  .characterMeta .characterGameMaster
-{
-    width: max-content;
-    padding: 10px 30px;
-    max-width: 100%;
-}
-#characterList  .characterMeta .characterPlayer{
-    background-color: #1A913C;
-}
-#characterList  .characterMeta .characterGameMaster{
-    background-color: #5F02D1;
-}
-#characterList  .characterMeta h4{
-    margin-bottom: 0;
-    line-height: 1;
-}
-#characterList .characterSheet{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30%;
-}
-/* catalog nav  */
-#characterList .characterListNav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 30%;
-    margin-top: 15px;
-}
-#characterList .characterListNav button{
-    width: 45px;
-    height: 45px;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#characterList .characterListNav button iconify-icon  {
-    color:var(--background)
-}
-
-/* login form  */
-#formLogin {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 600px;
-  
-}
-#formLogin form{
-    background-color: var(--background-secound);
-    border-radius: 20px;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-#formLogin form label{
-    margin-bottom: 5px;
-    font-size: 16px;
-}
+/* menu  */
 nav.menuBar{
     width: 100%;
     display: flex;
@@ -385,4 +270,170 @@ nav.menuBar{
 	color: var(--main);
 }
 
+/* character list */
+#characterList{
+    background-color: var(--background-secound);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+#characterList .content{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    width: inherit;
+}
+#characterList .character{
+    background-color: var(--background);
+    padding: 10px 20px;
+    border-radius: 20px;
+    width: inherit;
+}
+#characterList .characterImg {
+    width: 20%;
+}
+#characterList .characterImg img{
+    width: 200px;
+}
+#characterList .characterInfo{
+    padding: 0 20px;
+    width: 30%;
+}
+#characterList .characterInfo p{
+    font-size: 25px;
+    font-weight: 500;
+}
+#characterList .characterMoreInfo p{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 5px
+}
+#characterList .characterMeta{
+    padding: 0 20px;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:20px
+}
+#characterList .characterMeta > div{
+    width: 100%;
+}
+#characterList  .characterMeta .characterPlayer,
+#characterList  .characterMeta .characterGameMaster
+{
+    width: max-content;
+    padding: 10px 30px;
+    max-width: 100%;
+}
+#characterList  .characterMeta .characterPlayer{
+    background-color: #1A913C;
+}
+#characterList  .characterMeta .characterGameMaster{
+    background-color: #5F02D1;
+}
+#characterList  .characterMeta h4{
+    margin-bottom: 0;
+    line-height: 1;
+}
+#characterList .characterSheet{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+/* catalog nav  */
+#characterList .characterListNav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+    margin-top: 15px;
+}
+#characterList .characterListNav button{
+    width: 45px;
+    height: 45px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#characterList .characterListNav button iconify-icon  {
+    color:var(--background)
+}
 
+/* login form  */
+#formLogin {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+  
+}
+#formLogin form{
+    background-color: var(--background-secound);
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#formLogin form label{
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+/* characetr sheet */
+#characterSheet{
+    background-color: var(--background-secound);
+    padding: 20px;
+    border-radius: 30px;
+}
+#characterSheet .sheetSection {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 5px;
+}
+#characterSheet label{
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+#characterSheet span{
+    font-size: 20px;
+    font-weight: 400;
+}
+#characterSheet #characterInfo{
+    width: 100%;
+}
+#characterSheet table{
+    border-spacing: 2px;
+    border-collapse: initial;
+    width: 100%;
+    background: -moz-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    background: -webkit-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    background: linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="var(--second)",endColorstr="var(--main)",GradientType=1);
+    background-size: 200% 100%;
+    background-position: -100%;
+    -webkit-text-fill-color: var(--white);
+    transition: all 0.3s linear;
+}
+#characterSheet table:hover{
+    background-position: 0;
+}
+#characterSheet td{
+    padding: 5px 10px;
+    background-color: var(--background-secound);
+}
+#characterSheet #characterAttributes,#characterSheet #characterPoints{
+    width: 50%;
+}
+#characterSheet #characterAttributes span{
+    font-size: 16px;
+}
+#characterSheet #characterAttributes label:not(.text-center label){
+    font-size: 13px;

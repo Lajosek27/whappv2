@@ -5,15 +5,18 @@
 {% block body %}
 
 <div class="container-lg">
+    {% for error in app.flashes('error') %}
+     <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
     <div id="characterList">
         <div class="header"><h1>Lista postaci</h1></div>
         <div class="content">
         {# {{ dump(characters) }} #}
         {% for character in characters %}
             <div class="character d-flex">
-                <div class="characterImg"><a href='#' class="d-flex"><img src="{{asset("img/base-character-portrait.png")}}"></a></div>
+                <div class="characterImg"><a href='{{path('app_character_sheet',{'characterId' : character.id})}}' class="d-flex"><img src="{{asset("img/base-character-portrait.png")}}"></a></div>
                 <div class="characterInfo">
-                    <div class="characterName"><a href='#'><p>{{ character.name }}</p></a></div>
+                    <div class="characterName"><a href='{{path('app_character_sheet',{'characterId' : character.id})}}'><p>{{ character.name }}</p></a></div>
                     <div class="characterMoreInfo">
                         <p>Rasa: Elf</p>
                         <p>Profesja: Szlachcic</p>
@@ -34,7 +37,7 @@
                      
                 </div>
                 <div class="characterSheet">
-                    <a href="#"><button class="btn btn-primary btn-lg">Karta Postaci</button></a>
+                    <a href="{{path('app_character_sheet',{'characterId' : character.id})}}"><button class="btn btn-primary btn-lg">Karta Postaci</button></a>
                 </div>
             </div>
         {% endfor %}
