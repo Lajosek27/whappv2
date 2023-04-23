@@ -27,6 +27,10 @@ class Character
     #[ORM\Column]
     private ?bool $isPrivate = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?CharacterInfo $info = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +80,18 @@ class Character
     public function setIsPrivate(bool $isPrivate): self
     {
         $this->isPrivate = $isPrivate;
+
+        return $this;
+    }
+
+    public function getInfo(): ?CharacterInfo
+    {
+        return $this->info;
+    }
+
+    public function setInfo(CharacterInfo $info): self
+    {
+        $this->info = $info;
 
         return $this;
     }

@@ -7,6 +7,7 @@ use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\User;
 use App\Entity\Character;
+use App\Entity\CharacterInfo;
 use Doctrine\ORM\EntityManagerInterface;
 
 class UserFixtures extends Fixture
@@ -51,23 +52,31 @@ class UserFixtures extends Fixture
        $ruben->setPlayer(
             $this->entityManager->getRepository(User::class)->findOneBy(['username' => "admin"])
         );
+        $infoRuben = new CharacterInfo();
+        $infoRuben->setRace('Człowiek');
+        $infoRuben->setHeight(185);
+        $infoRuben->setHair('Krótkie Czarne');
+        $infoRuben->setEyes('Zielone');
+        $infoRuben->setAge(33);
+        $ruben->setInfo($infoRuben);
+        $manager->persist($ruben);
        $manager->persist($ruben);
 
-       $Nebur= new Character();
-       $Nebur->setName('Nebur');
-       $Nebur->setIsPrivate(0);
-       $Nebur->setPlayer(
-            $this->entityManager->getRepository(User::class)->findOneBy(['username' => "admin"])
-        );
-       $manager->persist($Nebur);
+    //    $Nebur= new Character();
+    //    $Nebur->setName('Nebur');
+    //    $Nebur->setIsPrivate(0);
+    //    $Nebur->setPlayer(
+    //         $this->entityManager->getRepository(User::class)->findOneBy(['username' => "admin"])
+    //     );
+    //    $manager->persist($Nebur);
 
-       $Ast= new Character();
-       $Ast->setName('Ast');
-       $Ast->setIsPrivate(false);
-       $Ast->setPlayer(
-            $this->entityManager->getRepository(User::class)->findOneBy(['username' => "user"])
-        );
-       $manager->persist($Ast);
+    //    $Ast= new Character();
+    //    $Ast->setName('Ast');
+    //    $Ast->setIsPrivate(false);
+    //    $Ast->setPlayer(
+    //         $this->entityManager->getRepository(User::class)->findOneBy(['username' => "user"])
+    //     );
+    //    $manager->persist($Ast);
 
        $manager->flush();
     }
