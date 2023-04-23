@@ -339,11 +339,17 @@ nav.menuBar{
     margin-bottom: 0;
     line-height: 1;
 }
-#characterList .characterSheet{
+#characterList .characterButtons{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap:15px;
     width: 30%;
+}
+#characterList .characterButtons a{
+    
+    width: 100%;
 }
 /* catalog nav  */
 #characterList .characterListNav{
