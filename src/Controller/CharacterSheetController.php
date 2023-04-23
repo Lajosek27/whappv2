@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Services\charactersService;
+use App\Entity\CharacterInfo;
+use App\Form\CharacterInfoType;
+
 
 class CharacterSheetController extends AbstractController
 {
@@ -28,11 +31,18 @@ class CharacterSheetController extends AbstractController
             $this->addFlash('error', 'Nie ma takiej postaci :/');
             return $this->redirectToRoute('app_catalog');
         }
+
+
         $character = $characterGetter->getCharacter($characterId);
+        
+        $formInfo = $this->createForm(CharacterInfoType::class, $character->getInfo());
+
         
         return $this->render('character_sheet/index.html.twig', [
             'character' => $character,
-            'edit' => $action==='edit'? true : false
+            'edit' => $action==='edit'? true : false,
+            'formInfo' => $formInfo,
+
         ]);
     }
 }

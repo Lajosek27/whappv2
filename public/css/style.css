@@ -8,6 +8,8 @@
     --second:#03DAC5;
     --white:#f1f1f1;
     --danger:#D10602;
+    --main-noaction:#5F02D1;
+    --green:#1A913C;
 }
 body{
    background-color: var(--background);
@@ -92,6 +94,14 @@ input.form-control{
 input.form-control:focus{
     background-position: 0;
     box-shadow: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
 }
 .alert.alert-danger{
     background: var(--danger);
@@ -330,10 +340,10 @@ nav.menuBar{
     max-width: 100%;
 }
 #characterList  .characterMeta .characterPlayer{
-    background-color: #1A913C;
+    background-color: var(--green);
 }
 #characterList  .characterMeta .characterGameMaster{
-    background-color: #5F02D1;
+    background-color: var(--main-noaction);
 }
 #characterList  .characterMeta h4{
     margin-bottom: 0;
@@ -419,6 +429,11 @@ nav.menuBar{
     border-spacing: 2px;
     border-collapse: initial;
     width: 100%;
+    
+}
+
+#characterSheet table.noclickable,
+#characterSheet table.clickable{
     background: -moz-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
     background: -webkit-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
     background: linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
@@ -428,6 +443,7 @@ nav.menuBar{
     -webkit-text-fill-color: var(--white);
     transition: all 0.3s linear;
 }
+#characterSheet table.noclickable,
 #characterSheet table:hover{
     background-position: 0;
 }
@@ -446,4 +462,7 @@ nav.menuBar{
 }
 #characterSheet #characterPoints label:not(.text-center label){
     font-size: 15px;
+}
+.sheetSection.characterInfo{
+    flex-direction: column;
 }

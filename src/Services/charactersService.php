@@ -87,6 +87,7 @@ class charactersService
     {
         return $this->manager->getRepository(Character::class)->findOneBy(['id' => $characterId]);
     }
+    
 }
 
 ?>
