@@ -470,3 +470,13 @@ nav.menuBar{
 .sheetSection.characterInfo{
     flex-direction: column;
 }
+/* channel log */
+#channelLog{
+    background-color: var(--background-secound);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+}

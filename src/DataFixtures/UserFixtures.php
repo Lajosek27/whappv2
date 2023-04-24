@@ -36,19 +36,27 @@ class UserFixtures extends Fixture
 
 
        $user = new User();
-       $user->setUsername('user');  
+       $user->setUsername('mysurek');  
        $user->setRoles(array('USER'));  
-       $hashedPassword = $this->passwordHasher->hashPassword($user ,'rootuser');
+       $hashedPassword = $this->passwordHasher->hashPassword($user ,'mysurek');
        $user->setPassword($hashedPassword);
 
        $manager->persist($user);
-       $manager->flush();
+       
+       $milus = new User();
+       $milus->setUsername('milus');  
+       $milus->setRoles(array('USER'));  
+       $hashedPassword = $this->passwordHasher->hashPassword($user ,'milus');
+       $milus->setPassword($hashedPassword);
 
+       $manager->persist($milus);
+       
+       $manager->flush();
 
        //characters
        $ruben= new Character();
        $ruben->setName('Ruben');
-       $ruben->setIsPrivate(true);
+       $ruben->setIsPrivate(false);
        $ruben->setPlayer(
             $this->entityManager->getRepository(User::class)->findOneBy(['username' => "admin"])
         );
@@ -60,7 +68,39 @@ class UserFixtures extends Fixture
         $infoRuben->setAge(33);
         $ruben->setInfo($infoRuben);
         $manager->persist($ruben);
-       $manager->persist($ruben);
+       
+        $otto= new Character();
+        $otto->setName('Otto');
+        $otto->setIsPrivate(false);
+        $otto->setPlayer(
+                $this->entityManager->getRepository(User::class)->findOneBy(['username' => "mysurek"])
+            );
+        $otto->setGameMaster(
+            $this->entityManager->getRepository(User::class)->findOneBy(['username' => "admin"])
+            );
+        $infoOtto = new CharacterInfo();
+        $infoOtto->setRace('Człowiek');
+        $infoOtto->setHeight(178);
+        $infoOtto->setHair('Łysy');
+        $infoOtto->setEyes('Bursztyn');
+        $infoOtto->setAge(45);
+        $otto->setInfo($infoOtto);
+        $manager->persist($otto);
+       
+        $kaladin= new Character();
+        $kaladin->setName('Kaladin');
+        $kaladin->setIsPrivate(false);
+        $kaladin->setPlayer(
+                $this->entityManager->getRepository(User::class)->findOneBy(['username' => "milus"])
+            );
+        $infoKal = new CharacterInfo();
+        $infoKal->setRace('Człowiek');
+        $infoKal->setHeight(181);
+        $infoKal->setHair('Czarne długie');
+        $infoKal->setEyes('Ciemne');
+        $infoKal->setAge(21);
+        $kaladin->setInfo($infoKal);
+        $manager->persist($kaladin);
 
     //    $Nebur= new Character();
     //    $Nebur->setName('Nebur');
