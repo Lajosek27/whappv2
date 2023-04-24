@@ -12,13 +12,7 @@ use App\Form\CharacterInfoType;
 
 class CharacterSheetController extends AbstractController
 {
-    #[Route(
-        '/character/sheet/{characterId}/{action}',
-         name: 'app_character_sheet',
-          requirements: [
-            'page' => '\d+',
-            'action' =>'show|edit'
-            ])]
+    #[Route('/character/sheet/{characterId}/{action}', name: 'app_character_sheet', requirements: [ 'page' => '\d+', 'action' =>'show|edit' ])]
     public function index(charactersService $characterGetter,string $action='show',int $characterId = 0): Response
     {
         if(!$this->getUser())
