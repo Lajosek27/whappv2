@@ -37,7 +37,7 @@ class CharacterInfoType extends AbstractType
              
             ])
             ->add('eyes',HiddenType::class,[
-                'label' => 'Eyes:', 
+                'label' => 'Oczy:', 
                 'required' => false,
                 
             ])

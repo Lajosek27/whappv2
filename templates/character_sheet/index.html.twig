@@ -10,7 +10,7 @@
     <div id="characterSheet">
         <div class="sheetSection">
                 <div id="characterImg">
-                    <div></div>
+                    <div>{{ dump(prof.tierOne) }}</div>
                 </div>
             </div>
         <div class="sheetSection characterInfo">
@@ -23,14 +23,26 @@
                         <tr>
                             <td colspan="2"><label>Nazwa postaci:</label><span>{{character.name}}</span></td>
                             <td><label>Rasa:</label><span id="character_info_race">{{character.info.race}}</span></td>
-                            <td><label>Klasa:</label><span>Wojownicy </span></td>
+                            <td><label>Klasa:</label><span>Wojownicy</span></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><label>Profesja:</label><span>Wędrowny czarodziej</span></td>
+                            <td colspan="2"><label>Profesja:</label><span>
+                            {% if character.profession is defined and character.profession.name is defined %}
+                                {{character.profession.name}}
+                                {% else %}
+                                brak
+                            {% endif %}
+                            </span></td>
                             <td colspan="2"><label>Poziom profesji:</label><span>2</span></td>
                         </tr>
                         <tr>
-                            <td colspan="3"><label>Ścieżka profesji:</label><span>Wędrowny czarodziej</span></td>
+                            <td colspan="3"><label>Ścieżka profesji:</label><span>
+                            {% if character.profession is defined and character.profession.name is defined %}
+                                {{character.profession.name}}
+                                {% else %}
+                                brak
+                            {% endif %}
+                            </span></td>
                             <td><label>Status:</label><span>Srebro 2</span></td>
                         </tr>
                         <tr>
