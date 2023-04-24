@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Profession;
-use App\Services\professionService;
+
 use Doctrine\ORM\EntityManagerInterface;
 
 class TestController extends AbstractController
 {
     #[Route('/test', name: 'app_test')]
-    public function index(professionService $tierGetter,EntityManagerInterface $manager): Response
+    public function index(EntityManagerInterface $manager): Response
     {   
         if(!$this->getUser() || !in_array('ADMIN', $this->getUser()->getRoles(), true))
         {   
@@ -20,7 +20,7 @@ class TestController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
         $prof = $manager->getRepository(Profession::class)->findOneBy(['id' => 1]);
-        $test = $tierGetter->getTier(1,$prof);
+        $test = $prof->getTier(1);
 
 
         return $this->render('test/index.html.twig', [

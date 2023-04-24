@@ -62,4 +62,15 @@ class Profession
 
         return $this;
     }
+
+
+    public function getTier(int $tier = 0) : array|false
+    {   
+        if( 0 > $tier || $tier > 3){return false;}
+
+        return array(
+            'name' => $this->getTierNames()[$tier],
+            'status' => $this->getStatuses()[$tier]
+        );
+    }
 }
