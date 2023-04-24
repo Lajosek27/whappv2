@@ -192,6 +192,21 @@
 </div>
 {% endblock %}
 
+{% block footer %}
+    {% if edit %}
+        <footer>
+        <div class="container-lg footer">
+            <div class="rightButtons">
+                <button type="submit" class="btn btn-primary">Zapisz(ale jeszcze nie działa)</button>
+                <a href="{{ path('app_character_sheet',{'characterId' : character.id, 'action' : 'edit'}) }}"><button type="submit" class="btn btn-primary">Reset(działam ;))</button></a>
+            </div>
+            <div class="rightButtons">
+                <button type="submit" class="btn btn-primary">Dodaj/zmień profesje</button>
+            </div>
+        </div>
+        </footer>
+    {% endif %}
+{% endblock %}
 
 
 {% block javascripts %}

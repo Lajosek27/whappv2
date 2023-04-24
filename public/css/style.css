@@ -166,7 +166,6 @@ nav.menuBar{
     visibility: visible;
 }
 
-/* Yellow band effect */
 .main-nav::before {
 	 content: '';
     position: absolute;
@@ -284,7 +283,19 @@ nav.menuBar{
 	text-align: center;
 	color: var(--main);
 }
+/* footer */
 
+footer{
+    background-color: var(--background-secound);
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+    padding: 20px 0;
+}
+footer .footer{
+    display: flex;
+    justify-content: space-between;
+}
 /* character list */
 #characterList{
     background-color: var(--background-secound);
