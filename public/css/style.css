@@ -110,6 +110,7 @@ input[type=number] {
 .alert.alert-danger{
     background: var(--danger);
     border: none;
+    color: var(--white);
 }
 /*  Póki co będzie text*/
 header .navbar-brand,header .navbar-brand:hover{-webkit-text-fill-color:#fff;font-size: 25px;}
