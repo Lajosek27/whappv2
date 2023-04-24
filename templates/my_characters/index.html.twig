@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Moje postaci{% endblock %}
+
+{% block body %}
+<div class="container-lg">
+    {% for error in app.flashes('error') %}
+     <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
+    <div id="characterList">
+        <div class="header"><h1>Moje Postaci</h1></div>
+        <div class="content">
+        {# {{ dump(characters) }} #}
+         {% for character in characters %}
+            <div class="character d-flex">
+                <div class="characterImg"><a href='#' class="d-flex"><img src="{{asset("img/base-character-portrait.png")}}"></a></div>
+                <div class="characterInfo">
+                    <div class="characterName"><a href='#'><p>{{ character.name }}</p></a></div>
+                    <div class="characterMoreInfo">
+                        <p>Rasa: {{character.info.race}}</p>
+                        <p>Profesja: Szlachcic</p>
+                        <p>Sciężka profesji: Szlachcic</p>
+                    </div>
+                </div>
+                
+                <div class="characterButtons">
+                    {% if app.user == character.player %}
+                        <a href="{{path('app_character_sheet',{'characterId' : character.id})}}"><button class="btn btn-primary btn-lg">Karta Postaci</button></a>
+                        <a href="{{path('app_character_sheet',{'characterId' : character.id,'action' : 'edit'})}}"><button class="btn btn-primary btn-lg">Rozwiń Postaci</button></a>
+                        <a href="#"><button class="btn btn-primary btn-lg">Usuń</button></a>
+                    {% endif %}
+                    {% if app.user == character.gameMaster %}
+                        <a href="{{path('app_character_sheet',{'characterId' : character.id})}}"><button class="btn btn-primary btn-lg">Karta Postaci</button></a>
+                        <a href="{{path('app_character_sheet',{'characterId' : character.id,'action' : 'edit'})}}"><button class="btn btn-primary btn-lg">Edytuj Postaci</button></a>
+                        <a href="#"><button class="btn btn-primary btn-lg">Porzuć</button></a>
+                    {% endif %}
+                </div>
+                 <div class="characterMeta">
+                    {% if app.user == character.player %}
+                        <div>
+                            <h6>Jesteś:</h6>
+                            <h4 class="characterPlayer">Graczem</h4>
+                        </div>
+                    {% endif %}
+                    {# Będzie trzecia opcja włąscielem #}
+                    {% if app.user == character.gameMaster %}
+                    <div>
+                        <h6>Jesteś:</h6>
+                        <h4 class="characterGameMaster">Mistrzem Gry</h4>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+         <div class="characterListNav">
+           
+            <div class="nav-button-prev">
+                {% if page > 1 %}
+                <a href="{{path('app_my_characters', { 'page' : page-1 })}}"><button type="submit" class="btn btn-primary"><iconify-icon icon="material-symbols:arrow-right-alt"  width="30" rotate="180deg"></iconify-icon></button></a>
+                {% else %}
+                 <a><button type="submit" class="btn btn-primary" disabled><iconify-icon icon="material-symbols:arrow-right-alt"  width="30" rotate="180deg"></iconify-icon></button></a>
+                {% endif %}
+            </div>
+             <div class="navPageCounter">
+                <span>{{page}}</span>
+                <span>/</span>
+                <span>{{maxPage}}</span>
+            </div>
+            <div class="nav-button-next">
+                {% if page < maxPage %}
+                <a href="{{path('app_my_characters', { 'page' : page+1 })}}"><button type="submit" class="btn btn-primary"><iconify-icon icon="material-symbols:arrow-right-alt"  width="30"></iconify-icon></button></a>
+                {% else %}
+                <a><button type="submit" class="btn btn-primary" disabled><iconify-icon icon="material-symbols:arrow-right-alt"  width="30"></iconify-icon></button></a>
+                {% endif %}
+            </div>
+           
+        </div>
+    </div>
+
+  
+</div>
+{% endblock %}

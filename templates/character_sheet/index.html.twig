@@ -1,0 +1,204 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Karta Postaci {{character.name}}{% endblock %}
+
+{% block body %}
+<div class="container-lg">
+    {% for error in app.flashes('error') %}
+     <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
+    <div id="characterSheet">
+        <div class="sheetSection">
+                <div id="characterImg">
+                    {# <div></div> #}
+                </div>
+            </div>
+        <div class="sheetSection characterInfo">
+            <div id="characterInfo"{% if edit %}
+                   class="" type="button" data-bs-toggle="collapse" data-bs-target="#characterInfoForm" aria-expanded="false" aria-controls="characterInfoForm"
+                {% endif %}
+                >
+                <table  class=" {% if edit %} clickable {% else %}noclickable {% endif %}" >
+                    <tbody>
+                        <tr>
+                            <td colspan="2"><label>Nazwa postaci:</label><span>{{character.name}}</span></td>
+                            <td><label>Rasa:</label><span id="character_info_race">{{character.info.race}}</span></td>
+                            <td><label>Klasa:</label><span>Wojownicy</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><label>Profesja:</label><span>
+                            {% if character.profession is defined and character.profession.name is defined %}
+                                {{character.profession.name}}
+                                {% else %}
+                                brak
+                            {% endif %}
+                            </span></td>
+                            <td colspan="2"><label>Poziom profesji:</label><span>2</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><label>Ścieżka profesji:</label><span>
+                            {% if character.profession is defined and character.profession.name is defined %}
+                                {{character.profession.name}}
+                                {% else %}
+                                brak
+                            {% endif %}
+                            </span></td>
+                            <td><label>Status:</label><span>Srebro 2</span></td>
+                        </tr>
+                        <tr>
+                            <td><label>Wiek:</label><span id="character_info_age">{{character.info.age}} lat</span></td>
+                            <td><label>Wzrost:</label><span id="character_info_height">{{character.info.height}} cm</span></td>
+                            <td><label>Włosy:</label><span id="character_info_hair">{{character.info.hair}}</span></td>
+                            <td><label>Oczy:</label><span id="character_info_eyes">{{character.info.eyes}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+             {% if edit %}
+            <div id="characterInfoForm" class="accordion-collapse collapse" aria-labelledby="characterInfo" >
+                {{ form_start(formInfo) }}
+                 <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                            <label>{{form_label(formInfo.race)}}</label>
+                            <span>{{ form_widget(formInfo.race)}}</span>
+                            <span><input type="text" id="character_info_race_vis" class="form-control" value="{{character.info.race}}" onChange="updateValue(this)"></span>
+                            </td>
+                            <td>
+                            <label>{{form_label(formInfo.age)}}</label>
+                            <span>{{ form_widget(formInfo.age)}}</span>
+                            <span><input type="number" id="character_info_age_vis" class="form-control" value="{{character.info.age}}" onChange="updateValue(this)"></span>
+                            </td>
+                            <td>
+                            <label>{{form_label(formInfo.height)}}</label>
+                            <span>{{ form_widget(formInfo.height)}}</span>
+                            <span><input type="number" id="character_info_height_vis" class="form-control" value="{{character.info.height}}" onChange="updateValue(this)"></span>
+                            </td>
+                            <td>
+                            <label>{{form_label(formInfo.hair)}}</label>
+                            <span>{{ form_widget(formInfo.hair)}}</span>
+                            <span><input type="text" id="character_info_hair_vis" class="form-control" value="{{character.info.hair}}" onChange="updateValue(this)"></span>
+                            </td>
+                            <td>
+                            <label>{{form_label(formInfo.eyes)}}</label>
+                            <span>{{ form_widget(formInfo.eyes)}}</span>
+                            <span><input type="text" id="character_info_eyes_vis" class="form-control" value="{{character.info.eyes}}" onChange="updateValue(this)"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                {{ form_end(formInfo) }}
+            </div>
+             {% endif %}
+        </div>
+        <div class="sheetSection">
+            <div id="characterAttributes">
+                <table class="clickable">
+                    <tbody>
+                        <tr>
+                            <td colspan="12" class="text-center"><label>Cechy</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><label></label></td>
+                           <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                         <tr>
+                            <td colspan="2"><label>Początkowa</label></td>
+                            <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                         <tr>
+                            <td colspan="2"><label>Rozwinięcia</label></td>
+                            <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                         <tr>
+                            <td colspan="2"><label>Aktualna</label></td>
+                            <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="characterPoints">
+                <table class="clickable">
+                    <tbody>
+                         <tr>
+                            <td colspan="6" class="text-center"><label>Punkty Doświadczenia:</label><span>10000000</span></td>
+                        </tr>
+                         <tr>
+                            <td colspan="3"><label>Wolne:</label><span>12220</span></td>
+                            <td colspan="3"><label>Wydane:</label><span>10000</span></td>
+                           
+                        </tr>
+                        <tr>
+                            <td colspan="3"><label>Punkty Bohatera:</label><span>2</span></td>
+                            <td colspan="3"><label>Punkty Determinacji:</label><span>2</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><label>Punkty Przeznaczenia:</label><span>2</span></td>
+                            <td colspan="3"><label>Punkty Szczęścia:</label><span>2</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><label>Szybkość:</label><span>2</span></td>
+                            <td colspan="2"><label>Chód:</label><span>x2</span></td>
+                            <td colspan="2"><label>Bieg:</label><span>x4</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+           {# <div class="accordion-item">
+           <h2 class="accordion-header" id="item-head-0"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item-0" aria-expanded="false" aria-controls="item-0" data-dashlane-rid="f895bd2a3492c014" data-dashlane-label="true" data-form-type="">Aptekarz</button></h2>
+           <div id="item-0" class="accordion-collapse collapse" aria-labelledby="item-head-0" data-bs-parent="#list" style="">
+           <div class="accordion-body"><strong>Maksymana liczba rozwinięć: Bonus z Inteligencji</strong> <br><br> Możesz odwrócić kolejność kości nieudanego Testu Rzemiosła (Aptekarstwa), jeśli nowy wynik pozwoli ci odnieść sukces.</div> </div></div> #}
+    </div>
+
+  
+</div>
+{% endblock %}
+
+
+
+{% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            <script src="{{ asset("js/menu.js") }}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+            <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+            <script src="{{ asset("js/characterSheet.js") }}"></script>
+{% endblock %}
