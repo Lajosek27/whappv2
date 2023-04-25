@@ -25,6 +25,9 @@ class Profession
     #[ORM\Column(length: 30)]
     private ?string $grupe = null;
 
+    #[ORM\Column(length: 180)]
+    private ?string $creatorName = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +88,18 @@ class Profession
     public function setGrupe(string $grupe): self
     {
         $this->grupe = $grupe;
+
+        return $this;
+    }
+
+    public function getCreatorName(): ?string
+    {
+        return $this->creatorName;
+    }
+
+    public function setCreatorName(string $creatorName): self
+    {
+        $this->creatorName = $creatorName;
 
         return $this;
     }

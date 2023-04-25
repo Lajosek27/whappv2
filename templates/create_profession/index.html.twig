@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CreateProfessionController!{% endblock %}
+
+{% block body %}
+<div class="container-lg">
+    {% for error in app.flashes('error') %}
+     <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
+
+    <div id="createProfession">
+         <h1 class="text-center">Stwórz profesje</h1>
+         <div class="professionForm">
+         {{ form_start(form) }}
+                  <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">
+                                {{form_label(form.name)}}
+                                {{ form_widget(form.name)}}
+                            </td>
+                            <td colspan="1">
+                                {{form_label(form.grupe)}}
+                                {{ form_widget(form.grupe)}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-start" colspan="4">
+                                <label>Poziom pierwszy</label>   
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                {{form_label(form.tierName1)}}
+                                {{ form_widget(form.tierName1)}}
+                            </td>
+                            <td colspan="1">
+                                {{form_label(form.status1)}}
+                                {{ form_widget(form.status1)}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-start" colspan="4">
+                                <label>Poziom drugi</label>   
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                {{form_label(form.tierName2)}}
+                                {{ form_widget(form.tierName2)}}
+                            </td>
+                            <td colspan="1">
+                                {{form_label(form.status2)}}
+                                {{ form_widget(form.status2)}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-start" colspan="4">
+                                <label>Poziom trzeci</label>   
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                {{form_label(form.tierName3)}}
+                                {{ form_widget(form.tierName3)}}
+                            </td>
+                            <td colspan="1">
+                                {{form_label(form.status3)}}
+                                {{ form_widget(form.status3)}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-start" colspan="4">
+                                <label>Poziom czwarty</label>   
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                {{form_label(form.tierName4)}}
+                                {{ form_widget(form.tierName4)}}
+                            </td>
+                            <td colspan="1">
+                                {{form_label(form.status4)}}
+                                {{ form_widget(form.status4)}}
+                            </td>
+                        </tr>
+                      
+                        
+                    </tbody>
+                </table>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
