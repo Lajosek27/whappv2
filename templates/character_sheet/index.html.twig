@@ -7,6 +7,9 @@
     {% for error in app.flashes('error') %}
      <div class="alert alert-danger">{{ error }}</div>
     {% endfor %}
+    {% for succes in app.flashes('succes') %}
+     <div class="alert alert-succes">{{ succes }}</div>
+    {% endfor %}
     <div id="characterSheet">
         <div class="sheetSection">
                 <div id="characterImg">
@@ -200,8 +203,8 @@
                 <button type="submit" class="btn btn-primary">Zapisz(ale jeszcze nie działa)</button>
                 <a href="{{ path('app_character_sheet',{'characterId' : character.id, 'action' : 'edit'}) }}"><button type="submit" class="btn btn-primary">Reset(działam ;))</button></a>
             </div>
-            <div class="rightButtons">
-                <button type="submit" class="btn btn-primary">Dodaj/zmień profesje</button>
+            <div class="leftButtons">
+                <a href="{{ path('app_set_profession',{ 'characterId' : character.id }) }}"><button type="submit" class="btn btn-primary">Dodaj/zmień profesje</button></a>
             </div>
         </div>
         </footer>
