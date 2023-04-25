@@ -11,10 +11,17 @@
     --main-noaction:#5F02D1;
     --green:#1A913C;
 }
+::selection{
+    background: #FF6000;
+    color: var(--white);
+}
 body{
    background-color: var(--background);
    color: #f1f1f1;
    min-height: 100vh;
+}
+body > .container-lg{
+    margin-bottom: 120px;
 }
 a:not(a > button){
     background: var(--second);
@@ -40,7 +47,15 @@ a:not(a > button){
   }
 
   a.active{background-position: 0!important}
-.sf-toolbar a{-webkit-text-fill-color:#fff;padding:0}
+
+ .sf-toolbar a{-webkit-text-fill-color:#fff;padding:0}
+
+ a.disabled{
+    pointer-events: none;
+    background-position: 0;
+    opacity: var(--bs-btn-disabled-opacity);
+    cursor: auto;
+ }
 
 header{
     background-color: var(--background-secound);
@@ -74,6 +89,13 @@ header{
 .btn-primary:hover{
     background-position: 0;
 }
+button:disabled,
+a.disabled > button{
+    opacity: var(--bs-btn-disabled-opacity);
+    background-position: 0;
+    cursor: auto;
+}
+
 /* inputs */
 input.form-control{
     background: -moz-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
@@ -110,6 +132,10 @@ input[type=number] {
 .alert.alert-danger{
     background: var(--danger);
     border: none;
+    color: var(--white);
+}
+.alert.alert-succes{
+    background-color: var(--green);
 }
 /*  Póki co będzie text*/
 header .navbar-brand,header .navbar-brand:hover{-webkit-text-fill-color:#fff;font-size: 25px;}
@@ -165,7 +191,6 @@ nav.menuBar{
     visibility: visible;
 }
 
-/* Yellow band effect */
 .main-nav::before {
 	 content: '';
     position: absolute;
@@ -283,7 +308,20 @@ nav.menuBar{
 	text-align: center;
 	color: var(--main);
 }
+/* footer */
 
+footer{
+    background-color: var(--background-secound);
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    padding: 20px 0;
+    z-index: 10;
+}
+footer .footer{
+    display: flex;
+    justify-content: space-between;
+}
 /* character list */
 #characterList{
     background-color: var(--background-secound);
@@ -336,6 +374,7 @@ nav.menuBar{
 #characterList .characterMeta > div{
     width: 100%;
 }
+
 #characterList  .characterMeta .characterPlayer,
 #characterList  .characterMeta .characterGameMaster
 {
@@ -479,4 +518,130 @@ nav.menuBar{
     flex-direction: column;
     
     width: 100%;
+}
+
+/* profession list */
+#setProfession{
+    background-color: var(--background-secound);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+#professionList{
+    width: 70%;
+    
+}
+#professionList .profession{
+    display: flex;
+    position: relative;
+    z-index: 2;
+}
+#professionList .accordion-wrapper{
+    width: 100%;
+}
+#professionList .profession .accordion-header button{
+    font-size: 25px;
+}
+#professionList .profession .accordion-header{
+    width: 100%;
+    background: -moz-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    background: -webkit-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    background: linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="var(--second)",endColorstr="var(--main)",GradientType=1);
+    background-size: 200% 100%;
+    background-position: -100%;
+    padding: 10px 15px;
+    position: relative;
+    -webkit-text-fill-color: var(--background);
+    transition: all 0.3s linear;
+    display: flex;
+    align-items: center;
+}
+#professionList .profession .accordion-header > div{
+    display: inline-flex;
+    align-items: center;
+}
+#professionList .profession .accordion-header h6 {
+    margin: 0;
+    padding-right: 5px ;
+}
+#professionList .profession .accordion-header h5 {
+    margin: 0;
+    padding: 10px 15px;
+}
+#professionList .profession:hover .accordion-header{
+    background-position: 0;
+}
+
+#professionList .profession .tier{
+    background: var(--background);
+    padding: 20px;
+}
+#professionList .profession .tier .header{
+    display: flex;
+    
+}
+#professionList .profession .tier .header > div{
+    width: 33%;
+}
+#professionList .profession .tier .header .button{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#professionList .profession .tier .header .professionName,
+#professionList .profession .tier .header .status{
+    width: max-content;
+    padding: 10px 30px;
+    max-width: 100%;
+}
+#professionList .profession .tier .header .status{
+    background-color: var(--green);
+}
+#professionList .profession .author,
+#professionList .profession .tier .header .professionName{
+    background-color: var(--main-noaction);
+    -webkit-text-fill-color: var(--white)
+}
+#professionList .profession .comet-wrapper img{
+    position: relative;
+    z-index: -1;
+    
+}
+#professionList .profession .comet-wrapper.left.show img,
+#professionList .profession .comet-wrapper.right.show img{
+    left: 0;
+    opacity: 1;
+}
+#professionList .profession .comet-wrapper.right.hide img{
+    left: -50px;
+    opacity: 0
+}
+#professionList .profession .comet-wrapper.left.hide img{
+    left: 50px;
+    opacity: 0
+}
+#professionList .profession .comet-wrapper.right.hidding img{
+    left: -50px !important;
+    opacity: 0 !important;
+    transition: all 0.3s ease-in-out;
+}
+#professionList .profession .comet-wrapper.left.hidding img{
+    left: 50px !important;
+    opacity: 0 !important;
+    transition: all 0.3s ease-in-out;
+}
+#professionList .profession .comet-wrapper.left.showing img,
+#professionList .profession .comet-wrapper.right.showing img{
+    left: 0px !important;
+    opacity: 1!important;
+    transition: all 0.3s ease-in-out;
+}
+#professionList .profession .content{
+    background-color: var(--background-secound);
+    padding: 10px 10px;
+    border-radius: 10px;
 }

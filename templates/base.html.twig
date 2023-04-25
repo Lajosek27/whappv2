@@ -50,6 +50,11 @@
                                 <li class="nav-item">
                                     <a href="{{path('app_logout')}}">Wyloguj</a>
                                 </li>
+                                {% if 'ADMIN' in app.user.roles %}
+                                <li class="nav-item">
+                                    <a href="{{path('app_test')}}">test</a>
+                                </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </nav>

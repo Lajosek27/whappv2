@@ -8,7 +8,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\User;
 use App\Entity\Character;
 use App\Entity\CharacterInfo;
+use App\Entity\Profession;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Util\Json;
 
 class UserFixtures extends Fixture
 {
@@ -28,7 +30,7 @@ class UserFixtures extends Fixture
        $admin = new User();
        $admin->setUsername('admin');  
        $admin->setRoles(array('ADMIN','USER'));  
-       $hashedPassword = $this->passwordHasher->hashPassword($admin ,'root');
+       $hashedPassword = $this->passwordHasher->hashPassword($admin ,'admin');
        $admin->setPassword($hashedPassword);
 
        $manager->persist($admin);
@@ -119,5 +121,14 @@ class UserFixtures extends Fixture
     //    $manager->persist($Ast);
 
        $manager->flush();
+
+        $prof = new Profession();
+        $prof->setName('Łowca czarownic');
+        $prof->setTierNames(array('oprawca','Łowca czarwnic','Inkwizytor','Wielki Łowca'));
+        $prof->setStatuses(array('b1','s3','s5','g2'));
+        $prof->setGrupe('Wojownicy');
+        
+        $manager->persist($prof);
+        $manager->flush();
     }
 }

@@ -19,8 +19,13 @@
                     <div class="characterName"><a href='{{path('app_character_sheet',{'characterId' : character.id})}}'><p>{{ character.name }}</p></a></div>
                     <div class="characterMoreInfo">
                         <p>Rasa: {{character.info.race}}</p>
-                        <p>Profesja: Szlachcic</p>
-                        <p>Sciężka profesji: Szlachcic</p>
+                        {% if character.profession  %} 
+                            <p>Profesja: {{character.profession.tierNames[character.professionLv]}}</p>
+                            <p>Scieżka profesji: {{character.profession.name}}</p>
+                        {% else %}
+                            <p>Wzrost: {{ character.info.height }} cm</p>
+                            <p>Wiek: {{ character.info.age }} lat</p>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="characterButtons">

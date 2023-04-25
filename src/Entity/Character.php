@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CharacterRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CharacterRepository::class)]
@@ -30,6 +31,12 @@ class Character
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?CharacterInfo $info = null;
+
+    #[ORM\ManyToOne]
+    private ?Profession $profession = null;
+
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    private ?int $professionLv = null;
 
     public function getId(): ?int
     {
@@ -92,6 +99,30 @@ class Character
     public function setInfo(CharacterInfo $info): self
     {
         $this->info = $info;
+
+        return $this;
+    }
+
+    public function getProfession(): ?Profession
+    {
+        return $this->profession;
+    }
+
+    public function setProfession(?Profession $profession): self
+    {
+        $this->profession = $profession;
+
+        return $this;
+    }
+
+    public function getProfessionLv(): ?int
+    {
+        return $this->professionLv;
+    }
+
+    public function setProfessionLv(?int $professionLv): self
+    {
+        $this->professionLv = $professionLv;
 
         return $this;
     }

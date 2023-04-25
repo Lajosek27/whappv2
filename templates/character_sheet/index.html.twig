@@ -7,6 +7,9 @@
     {% for error in app.flashes('error') %}
      <div class="alert alert-danger">{{ error }}</div>
     {% endfor %}
+    {% for succes in app.flashes('succes') %}
+     <div class="alert alert-succes">{{ succes }}</div>
+    {% endfor %}
     <div id="characterSheet">
         <div class="sheetSection">
                 <div id="characterImg">
@@ -23,27 +26,54 @@
                         <tr>
                             <td colspan="2"><label>Nazwa postaci:</label><span>{{character.name}}</span></td>
                             <td><label>Rasa:</label><span id="character_info_race">{{character.info.race}}</span></td>
-                            <td><label>Klasa:</label><span>Wojownicy</span></td>
+                            <td>
+                                <label>Klasa:</label>
+                                <span>
+                                    {% if character.profession and character.profession.grupe is defined %}
+                                        {{character.profession.grupe}}
+                                    {% else %}
+                                    brak
+                                    {% endif %}
+                                </span>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2"><label>Profesja:</label><span>
-                            {% if character.profession is defined and character.profession.name is defined %}
-                                {{character.profession.name}}
+                            {% if character.professionLv is defined and character.profession.tierNames is defined %}
+                                {{character.profession.tierNames[character.professionLv]}}
                                 {% else %}
                                 brak
                             {% endif %}
                             </span></td>
-                            <td colspan="2"><label>Poziom profesji:</label><span>2</span></td>
+                            <td colspan="2">
+                                <label>Poziom profesji:</label>
+                                <span>
+                                    {% if character.profession and character.professionLv is defined  %}
+                                        {{character.professionLv +1}}
+                                    {% else %}
+                                        brak
+                                    {% endif %}
+                                </span>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="3"><label>Ścieżka profesji:</label><span>
-                            {% if character.profession is defined and character.profession.name is defined %}
+                            {% if character.profession  and character.profession.name is defined %}
                                 {{character.profession.name}}
                                 {% else %}
                                 brak
                             {% endif %}
                             </span></td>
-                            <td><label>Status:</label><span>Srebro 2</span></td>
+                            <td>
+                                <label>Status:</label>
+                                <span>
+                                {% if character.professionLv is defined and character.profession.statuses is defined %}
+                                    {{character.profession.statuses[character.professionLv]}}
+                                {% else %}
+                                    brak
+                                {% endif %}
+                                </span>
+                            </td>
                         </tr>
                         <tr>
                             <td><label>Wiek:</label><span id="character_info_age">{{character.info.age}} lat</span></td>
@@ -192,6 +222,21 @@
 </div>
 {% endblock %}
 
+{% block footer %}
+    {% if edit %}
+        <footer>
+            <div class="container-lg footer">
+                <div class="rightButtons">
+                    <button type="submit" class="btn btn-primary">Zapisz(ale jeszcze nie działa)</button>
+                    <a href="{{ path('app_character_sheet',{'characterId' : character.id, 'action' : 'edit'}) }}"><button type="submit" class="btn btn-primary">Reset(działam ;))</button></a>
+                </div>
+                <div class="leftButtons">
+                    <a href="{{ path('app_set_profession',{ 'characterId' : character.id }) }}"><button type="submit" class="btn btn-primary">{% if character.profession %}Zmień Profesje{% else %}Dodaj Profesje{% endif %}</button></a>
+                </div>
+            </div>
+        </footer>
+    {% endif %}
+{% endblock %}
 
 
 {% block javascripts %}

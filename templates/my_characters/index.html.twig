@@ -13,13 +13,18 @@
         {# {{ dump(characters) }} #}
          {% for character in characters %}
             <div class="character d-flex">
-                <div class="characterImg"><a href='#' class="d-flex"><img src="{{asset("img/base-character-portrait.png")}}"></a></div>
+                <div class="characterImg"><a href='{{path('app_character_sheet',{'characterId' : character.id})}}' class="d-flex"><img src="{{asset("img/base-character-portrait.png")}}"></a></div>
                 <div class="characterInfo">
-                    <div class="characterName"><a href='#'><p>{{ character.name }}</p></a></div>
+                    <div class="characterName"><a href='{{path('app_character_sheet',{'characterId' : character.id})}}'><p>{{ character.name }}</p></a></div>
                     <div class="characterMoreInfo">
                         <p>Rasa: {{character.info.race}}</p>
-                        <p>Profesja: Szlachcic</p>
-                        <p>Sciężka profesji: Szlachcic</p>
+                        {% if character.profession   %} 
+                            <p>Profesja: {{character.profession.tierNames[character.professionLv]}}</p>
+                            <p>Scieżka profesji: {{character.profession.name}}</p>
+                        {% else %}
+                            <p>Wzrost: {{ character.info.height }} cm</p>
+                            <p>Wiek: {{ character.info.age }} lat</p>
+                        {% endif %}
                     </div>
                 </div>
                 
