@@ -127,6 +127,7 @@ class UserFixtures extends Fixture
         $prof->setTierNames(array('oprawca','Łowca czarwnic','Inkwizytor','Wielki Łowca'));
         $prof->setStatuses(array('b1','s3','s5','g2'));
         $prof->setGrupe('Wojownicy');
+        $prof->setCreatorName('Lajosek');
         
         $manager->persist($prof);
         $manager->flush();

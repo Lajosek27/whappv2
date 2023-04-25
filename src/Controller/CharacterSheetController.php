@@ -21,7 +21,7 @@ class CharacterSheetController extends AbstractController
         '/character/sheet/{characterId}/{action}',
          name: 'app_character_sheet',
           requirements: [
-            'page' => '\d+',
+            'characterId' => '\d+',
             'action' =>'show|edit'
             ])]
     public function index(charactersService $characterGetter,string $action='show',int $characterId = 0): Response
