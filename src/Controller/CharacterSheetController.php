@@ -13,6 +13,7 @@ use App\Form\CharacterInfoType;
 use App\Repository\ProfessionRepository;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormFactoryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class CharacterSheetController extends AbstractController
 {
@@ -58,7 +59,7 @@ class CharacterSheetController extends AbstractController
     }
 
     #[Route('/set/profession/{characterId}', name: 'app_set_profession',  requirements: ['characterId' => '\d+'])]
-    public function setProfession(charactersService $characterGetter,ProfessionRepository $profRepo,FormFactoryInterface $formFactory,Request $request,int $characterId = 0)
+    public function setProfession(ProfessionRepository $profRepo,FormFactoryInterface $formFactory, EntityManagerInterface $manager,Request $request,int $characterId = 0)
     {
         if(!$this->getUser())
         {   
@@ -71,7 +72,7 @@ class CharacterSheetController extends AbstractController
             return $this->redirectToRoute('app_catalog');
         }
         
-        $character = $characterGetter->getCharacter($characterId);
+        $character = $manager->getRepository(Character::class)->findOneBy(['id' => $characterId]);
         
         if( $character->getPlayer() !== $this->getUser() && $character->getGameMaster() !== $this->getUser() )
         {
@@ -80,10 +81,10 @@ class CharacterSheetController extends AbstractController
         }
 
         $profs = $profRepo->findAll();
-
+        
         $form = $formFactory->createBuilder()
         ->add('charcterId', HiddenType::class,[
-            'attr' => ['value' => 0]
+            'attr' => ['value' => $character->getProfession() ? $character->getProfession()->getId() : 0 ]
             ])
         ->getForm();
 
@@ -91,7 +92,7 @@ class CharacterSheetController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $input = $form->get('charcterId')->getData();
             if (!filter_var($input, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]) !== false) {
-                $this->addFlash('error', 'Coś poszło nie tak :/'. $input);
+                $this->addFlash('error', 'Coś poszło nie tak :/');
                 return $this->render('character_sheet/setProfession.html.twig', [
                     'character' => $character,
                     'professions' => $profs,
@@ -101,11 +102,13 @@ class CharacterSheetController extends AbstractController
             }
 
             
+            $character->setProfession($profRepo->find($input));
+            $character->setProfessionLv(0);
+            $manager->persist($character);
+            $manager->flush();
             
 
-           
-
-            $this->addFlash('succes', 'Twoje dane to: '.$input );
+            $this->addFlash('succes', 'Zapisano zmiany' );
             return $this->redirectToRoute('app_character_sheet',[
                 "characterId" => $characterId,
                 'action' => 'edit'

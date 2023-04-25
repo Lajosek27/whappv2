@@ -22,6 +22,9 @@ class Profession
     #[ORM\Column]
     private array $statuses = [];
 
+    #[ORM\Column(length: 30)]
+    private ?string $grupe = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -72,5 +75,17 @@ class Profession
             'name' => $this->getTierNames()[$tier],
             'status' => $this->getStatuses()[$tier]
         );
+    }
+
+    public function getGrupe(): ?string
+    {
+        return $this->grupe;
+    }
+
+    public function setGrupe(string $grupe): self
+    {
+        $this->grupe = $grupe;
+
+        return $this;
     }
 }

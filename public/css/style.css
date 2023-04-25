@@ -11,6 +11,10 @@
     --main-noaction:#5F02D1;
     --green:#1A913C;
 }
+::selection{
+    background: #FF6000;
+    color: var(--white);
+}
 body{
    background-color: var(--background);
    color: #f1f1f1;
@@ -549,11 +553,24 @@ footer .footer{
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="var(--second)",endColorstr="var(--main)",GradientType=1);
     background-size: 200% 100%;
     background-position: -100%;
-    display: inline-block;
     padding: 10px 15px;
     position: relative;
     -webkit-text-fill-color: var(--background);
     transition: all 0.3s linear;
+    display: flex;
+    align-items: center;
+}
+#professionList .profession .accordion-header > div{
+    display: inline-flex;
+    align-items: center;
+}
+#professionList .profession .accordion-header h6 {
+    margin: 0;
+    padding-right: 5px ;
+}
+#professionList .profession .accordion-header h5 {
+    margin: 0;
+    padding: 10px 15px;
 }
 #professionList .profession:hover .accordion-header{
     background-position: 0;
@@ -584,8 +601,10 @@ footer .footer{
 #professionList .profession .tier .header .status{
     background-color: var(--green);
 }
+#professionList .profession .author,
 #professionList .profession .tier .header .professionName{
     background-color: var(--main-noaction);
+    -webkit-text-fill-color: var(--white)
 }
 #professionList .profession .comet-wrapper img{
     position: relative;
@@ -621,4 +640,8 @@ footer .footer{
     opacity: 1!important;
     transition: all 0.3s ease-in-out;
 }
-
+#professionList .profession .content{
+    background-color: var(--background-secound);
+    padding: 10px 10px;
+    border-radius: 10px;
+}

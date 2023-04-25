@@ -123,10 +123,12 @@ class UserFixtures extends Fixture
        $manager->flush();
 
         $prof = new Profession();
-        $prof->setName('Łowca czarwnic');
+        $prof->setName('Łowca czarownic');
         $prof->setTierNames(array('oprawca','Łowca czarwnic','Inkwizytor','Wielki Łowca'));
         $prof->setStatuses(array('b1','s3','s5','g2'));
-    $manager->persist($prof);
-    $manager->flush();
+        $prof->setGrupe('Wojownicy');
+        
+        $manager->persist($prof);
+        $manager->flush();
     }
 }

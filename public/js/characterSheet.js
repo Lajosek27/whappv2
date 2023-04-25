@@ -17,21 +17,16 @@ function selectProfession(id){
     input = document.getElementById('form_charcterId')
     button = document.querySelector('footer .rightButtons a')
     
+    debugger
     input.value = input.value === profession.dataset.profId ? 0 : profession.dataset.profId
     
-    input.value === 0 ? button.classList.add('disabled') : button.classList.remove('disabled')
+    input.value == 0 ? button.classList.add('disabled') : button.classList.remove('disabled')
     console.log(profession)
 
     professions.forEach(prof => {
         (prof.querySelector('.comet-wrapper').classList.contains('show') && prof != profession) ? comet(prof) : '';
-
     });
    comet(profession)
-    // const myTimeout = setTimeout(() => {
-    //     cometLeft.classList.toggle('show')
-    //     cometRight.classList.toggle('show')
-    // }, 3333);
-    
     
 
 }
