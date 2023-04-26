@@ -19,6 +19,7 @@ body{
    background-color: var(--background);
    color: #f1f1f1;
    min-height: 100vh;
+   font-family: 'Montserrat', cursive;
 }
 body > .container-lg{
     margin-bottom: 120px;
@@ -175,6 +176,7 @@ header .navbar-nav a{
 }
 body h1,body h2,body h3,body h4,body h5,body h6{
     font-family: 'Bebas Neue', cursive;
+    letter-spacing: 1px;
 }
 /* menu  */
 nav.menuBar{
@@ -233,7 +235,7 @@ nav.menuBar{
     display: block;
     margin: .5rem 0;
     text-align: center;
-    
+    letter-spacing: 1px;
     font-family: 'Bebas Neue', cursive;
     font-size: 25px;
 }
@@ -408,7 +410,7 @@ footer .footer{
 #characterList  .characterMeta .characterGameMaster{
     background-color: var(--main-noaction);
 }
-#characterList  .characterMeta h4{
+#characterList  .characterMeta h4,#characterList  .characterMeta h6{
     margin-bottom: 0;
     line-height: 1;
 }
@@ -494,7 +496,13 @@ footer .footer{
     width: 100%;
     
 }
-
+#characterSheet{
+	font-family:'Montserrat';
+}
+#characterSheet table label{
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 1px;
+}
 #characterSheet table.noclickable,
 #characterSheet table.clickable{
     background: -moz-linear-gradient(90deg, var(--second) 50%, var(--main) 50%);
@@ -684,6 +692,7 @@ footer .footer{
 #createProfession form  label{
     font-size: 20px;
     font-family: 'Bebas Neue', cursive;
+    letter-spacing: 1px;
 }
 #createProfession form  .text-start label{
     font-size: 30px;

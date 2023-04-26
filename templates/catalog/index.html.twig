@@ -19,7 +19,7 @@
                     <div class="characterName"><a href='{{path('app_character_sheet',{'characterId' : character.id})}}'><p>{{ character.name }}</p></a></div>
                     <div class="characterMoreInfo">
                         <p>Rasa: {{character.info.race}}</p>
-                        {% if character.profession  %} 
+                        {% if character.profession and character.professionLv is defined %} 
                             <p>Profesja: {{character.profession.tierNames[character.professionLv]}}</p>
                             <p>Scieżka profesji: {{character.profession.name}}</p>
                         {% else %}

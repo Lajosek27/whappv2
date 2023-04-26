@@ -19,8 +19,8 @@ class TestController extends AbstractController
             $this->addFlash('error', 'Nie posiadasz dostępu do rządanego zasobu :/');
             return $this->redirectToRoute('app_login');
         }
-        $prof = $manager->getRepository(Profession::class)->findOneBy(['id' => 1]);
-        $test = $prof->getTier(1);
+        // $prof = $manager->getRepository(Profession::class)->findOneBy(['id' => 1]);
+        // $test = $prof->getTier(1);
 
 
         return $this->render('test/index.html.twig', [
