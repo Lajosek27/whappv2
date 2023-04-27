@@ -591,6 +591,9 @@ footer .footer{
 #professionList .profession .accordion-header button{
     padding: 10px 15px;
 }
+#professionList .profession .accordion-header iconify-icon.arrowDown{
+    transform: rotate(180deg)
+}
 #professionList .profession .accordion-header > div{
     display: inline-flex;
     align-items: center;
@@ -614,7 +617,7 @@ footer .footer{
 }
 #professionList .profession .tier .header{
     display: flex;
-    
+    padding: 0 10px;
 }
 #professionList .profession .tier .header > div{
     width: 33%;
@@ -677,7 +680,18 @@ footer .footer{
     padding: 10px 10px;
     border-radius: 10px;
 }
+#professionList .profession iconify-icon{
+    color: var(--background);
+}
+#professionList .profession .mainInfo .header{
+    background-color: var(--background-secound);
+    padding: 10px 10px;
+    border-radius: 10px;
 
+}
+#professionList .profession h6{
+    margin-bottom: 0;
+}
 /* create profession */
 #createProfession {
     background-color: var(--background-secound);

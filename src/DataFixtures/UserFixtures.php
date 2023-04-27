@@ -48,13 +48,22 @@ class UserFixtures extends Fixture
        $milus = new User();
        $milus->setUsername('milus');  
        $milus->setRoles(array('USER'));  
-       $hashedPassword = $this->passwordHasher->hashPassword($user ,'milus');
+       $hashedPassword = $this->passwordHasher->hashPassword($milus ,'milus');
        $milus->setPassword($hashedPassword);
 
        $manager->persist($milus);
        
        $manager->flush();
 
+       $Liju = new User();
+       $Liju->setUsername('Liju');  
+       $Liju->setRoles(array('USER'));  
+       $hashedPassword = $this->passwordHasher->hashPassword($Liju ,'liju');
+       $Liju->setPassword($hashedPassword);
+
+       $manager->persist($Liju);
+       
+       $manager->flush();
        //characters
        $ruben= new Character();
        $ruben->setName('Ruben');
@@ -103,7 +112,23 @@ class UserFixtures extends Fixture
         $infoKal->setAge(21);
         $kaladin->setInfo($infoKal);
         $manager->persist($kaladin);
+        
 
+
+        $Lamp= new Character();
+        $Lamp->setName('Lamprecht');
+        $Lamp->setIsPrivate(false);
+        $Lamp->setPlayer(
+             $this->entityManager->getRepository(User::class)->findOneBy(['username' => "Liju"])
+         );
+         $infoLamp = new CharacterInfo();
+         $infoLamp->setRace('Człowiek');
+         $infoLamp->setHeight(185);
+         $infoLamp->setHair('Krótkie Czarne');
+         $infoLamp->setEyes('Zielone');
+         $infoLamp->setAge(33);
+         $Lamp->setInfo($infoLamp);
+         $manager->persist($Lamp);
     //    $Nebur= new Character();
     //    $Nebur->setName('Nebur');
     //    $Nebur->setIsPrivate(0);
