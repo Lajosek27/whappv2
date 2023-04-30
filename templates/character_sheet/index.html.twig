@@ -231,6 +231,7 @@
                     <a href="{{ path('app_character_sheet',{'characterId' : character.id, 'action' : 'edit'}) }}"><button type="submit" class="btn btn-primary">Reset(działam ;))</button></a>
                 </div>
                 <div class="leftButtons">
+                    {% if character.profession %}<a href="{{ path('app_customizing_profession',{ 'characterId' : character.id }) }}"><button type="submit" class="btn btn-primary">Profejsa</button></a>{% endif %}
                     <a href="{{ path('app_set_profession',{ 'characterId' : character.id }) }}"><button type="submit" class="btn btn-primary">{% if character.profession %}Zmień Profesje{% else %}Dodaj Profesje{% endif %}</button></a>
                 </div>
             </div>
