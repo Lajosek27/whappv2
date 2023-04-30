@@ -9,10 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Services\charactersService;
 use App\Entity\CharacterInfo;
+use Symfony\Component\Form\FormFactoryInterface;
 use App\Form\CharacterInfoType;
 use App\Repository\ProfessionRepository;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CharacterSheetController extends AbstractController
@@ -24,7 +26,7 @@ class CharacterSheetController extends AbstractController
             'characterId' => '\d+',
             'action' =>'show|edit'
             ])]
-    public function index(charactersService $characterGetter,string $action='show',int $characterId = 0): Response
+    public function index(charactersService $characterGetter,Request $request,EntityManagerInterface $manager,string $action='show',int $characterId = 0): Response
     {
         if(!$this->getUser())
         {   
@@ -49,6 +51,7 @@ class CharacterSheetController extends AbstractController
         
         $formInfo = $this->createForm(CharacterInfoType::class, $character->getInfo());
 
+
         
         return $this->render('character_sheet/index.html.twig', [
             'character' => $character,
@@ -58,8 +61,14 @@ class CharacterSheetController extends AbstractController
         ]);
     }
 
-    #[Route('/set/profession/{characterId}', name: 'app_set_profession',  requirements: ['characterId' => '\d+'])]
-    public function setProfession(ProfessionRepository $profRepo,FormFactoryInterface $formFactory, EntityManagerInterface $manager,Request $request,int $characterId = 0)
+    #[Route(
+        '/customizing/profession/{characterId}/{action}',
+         name: 'app_customizing_profession',
+          requirements: [
+            'characterId' => '\d+',
+            'action' =>'show|edit'
+            ])]
+    public function customizingProfession(charactersService $characterGetter,FormFactoryInterface $formFactory,Request $request,EntityManagerInterface $manager,string $action='show',int $characterId = 0): Response
     {
         if(!$this->getUser())
         {   
@@ -71,55 +80,57 @@ class CharacterSheetController extends AbstractController
             $this->addFlash('error', 'Nie ma takiej postaci :/');
             return $this->redirectToRoute('app_catalog');
         }
-        
-        $character = $manager->getRepository(Character::class)->findOneBy(['id' => $characterId]);
-        
-        if( $character->getPlayer() !== $this->getUser() && $character->getGameMaster() !== $this->getUser() )
+
+        $character = $characterGetter->getCharacter($characterId);
+
+        if($action == 'edit' && $character->getPlayer() !== $this->getUser() && $character->getGameMaster() !== $this->getUser() )
         {
             $this->addFlash('error', 'Nie posiadasz dostępu do rządanego zasobu :/');
             return $this->redirectToRoute('app_login');
         }
 
-        $profs = $profRepo->findAll();
-        
         $form = $formFactory->createBuilder()
-        ->add('charcterId', HiddenType::class,[
-            'attr' => ['value' => $character->getProfession() ? $character->getProfession()->getId() : 0 ]
+        ->add('professionLv',ChoiceType::class, [
+            'choices'  => [
+                $character->getProfession()->getTierNames()[0] => '0',
+                $character->getProfession()->getTierNames()[1] => '1',
+                $character->getProfession()->getTierNames()[2] => '2',
+                $character->getProfession()->getTierNames()[3] => '3',
+            ],
+            'attr' => ['class' => 'form-control'],
+            'label' => 'Poziom profesji:',
+            
+        ])
+        ->add('save', SubmitType::class, [
+            'label' => 'Zapisz',
+            'attr' => ['class' => 'btn btn-primary'],
             ])
         ->getForm();
-
+        
+        
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $input = $form->get('charcterId')->getData();
-            if (!filter_var($input, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]) !== false) {
-                $this->addFlash('error', 'Coś poszło nie tak :/');
-                return $this->render('character_sheet/setProfession.html.twig', [
-                    'character' => $character,
-                    'professions' => $profs,
-                    'form' => $form->createView()
-        
-                ]);
-            }
-
             
-            $character->setProfession($profRepo->find($input));
-            $character->setProfessionLv(0);
+            $character->setProfessionLv($form->get('professionLv')->getData());
+        
             $manager->persist($character);
             $manager->flush();
-            
 
             $this->addFlash('succes', 'Zapisano zmiany' );
             return $this->redirectToRoute('app_character_sheet',[
-                "characterId" => $characterId,
+                'characterId' => $characterId,
                 'action' => 'edit'
             ]);
         }
+
         
-        return $this->render('character_sheet/setProfession.html.twig', [
+        return $this->render('character_sheet/customizing_profession.html.twig', [
             'character' => $character,
-            'professions' => $profs,
+            'edit' => ($action==='edit' && $character->getGameMaster() !== $this->getUser())? true : false,
             'form' => $form->createView()
 
         ]);
     }
+
+    
 }

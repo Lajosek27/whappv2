@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Profession;
+use App\Entity\Character;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,6 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use App\Repository\ProfessionRepository;
+
 
 class CreateProfessionController extends AbstractController
 {
@@ -203,8 +207,73 @@ class CreateProfessionController extends AbstractController
                 'characterId' => $characterId
             ]);
         }
-        return $this->render('create_profession/index.html.twig', [
+        return $this->render('profession/index.html.twig', [
             'form' => $form
+        ]);
+    }
+    
+    #[Route('/set/profession/{characterId}', name: 'app_set_profession',  requirements: ['characterId' => '\d+'])]
+    public function setProfession(ProfessionRepository $profRepo,FormFactoryInterface $formFactory, EntityManagerInterface $manager,Request $request,int $characterId = 0)
+    {
+        if(!$this->getUser())
+        {   
+            $this->addFlash('error', 'Nie posiadasz dostępu do rządanego zasobu :/');
+            return $this->redirectToRoute('app_login');
+        }
+        if($characterId <= 0)
+        {   
+            $this->addFlash('error', 'Nie ma takiej postaci :/');
+            return $this->redirectToRoute('app_catalog');
+        }
+        
+        $character = $manager->getRepository(Character::class)->findOneBy(['id' => $characterId]);
+        
+        if( $character->getPlayer() !== $this->getUser() && $character->getGameMaster() !== $this->getUser() )
+        {
+            $this->addFlash('error', 'Nie posiadasz dostępu do rządanego zasobu :/');
+            return $this->redirectToRoute('app_login');
+        }
+
+        $profs = $profRepo->findAll();
+        
+        $form = $formFactory->createBuilder()
+        ->add('charcterId', HiddenType::class,[
+            'attr' => ['value' => $character->getProfession() ? $character->getProfession()->getId() : 0 ]
+            ])
+        ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $input = $form->get('charcterId')->getData();
+            if (!filter_var($input, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]) !== false) {
+                $this->addFlash('error', 'Coś poszło nie tak :/');
+                return $this->render('character_sheet/setProfession.html.twig', [
+                    'character' => $character,
+                    'professions' => $profs,
+                    'form' => $form->createView()
+        
+                ]);
+            }
+
+            
+            $character->setProfession($profRepo->find($input));
+            $character->setProfessionLv(0);
+            $manager->persist($character);
+            $manager->flush();
+            
+
+            $this->addFlash('succes', 'Zapisano zmiany' );
+            return $this->redirectToRoute('app_character_sheet',[
+                "characterId" => $characterId,
+                'action' => 'edit'
+            ]);
+        }
+        
+        return $this->render('profession/setProfession.html.twig', [
+            'character' => $character,
+            'professions' => $profs,
+            'form' => $form->createView()
+
         ]);
     }
 }

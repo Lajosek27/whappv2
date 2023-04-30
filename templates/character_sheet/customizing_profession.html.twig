@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Karta Postaci {{character.name}}{% endblock %}
+
+{% block body %}
+<div class="container-lg">
+    {% for error in app.flashes('error') %}
+     <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
+    {% for succes in app.flashes('succes') %}
+     <div class="alert alert-succes">{{ succes }}</div>
+    {% endfor %}
+    <div id="customizingProfession">
+        <div class="header"><h1>Profesja postaci {{character.name}}</h1></div>
+    </div>
+    <div class="content">
+        {{ form(form) }}
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+    {% if edit %}
+        <footer>
+            <div class="container-lg footer">
+                <div class="rightButtons">
+                    <button type="submit" class="btn btn-primary">Zapisz(ale jeszcze nie działa)</button>
+                    <a href="{{ path('app_character_sheet',{'characterId' : character.id, 'action' : 'edit'}) }}"><button type="submit" class="btn btn-primary">Reset(działam ;))</button></a>
+                </div>
+                <div class="leftButtons">
+                    {% if character.profession %}<a href="{{ path('app_customizing_profession',{ 'characterId' : character.id }) }}"><button type="submit" class="btn btn-primary">Profejsa</button></a>{% endif %}
+                    <a href="{{ path('app_set_profession',{ 'characterId' : character.id }) }}"><button type="submit" class="btn btn-primary">{% if character.profession %}Zmień Profesje{% else %}Dodaj Profesje{% endif %}</button></a>
+                </div>
+            </div>
+        </footer>
+    {% endif %}
+{% endblock %}
+
+
+{% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+            <script src="{{ asset("js/menu.js") }}"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+            <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+            <script src="{{ asset("js/characterSheet.js") }}"></script>
+{% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Character;
 use App\Entity\Profession;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,9 +20,9 @@ class TestController extends AbstractController
             $this->addFlash('error', 'Nie posiadasz dostępu do rządanego zasobu :/');
             return $this->redirectToRoute('app_login');
         }
-        // $prof = $manager->getRepository(Profession::class)->findOneBy(['id' => 1]);
-        // $test = $prof->getTier(1);
-
+        $char = $manager->getRepository(Character::class)->findOneBy(['id' => 5]);
+        
+        $test = $manager->getRepository(Profession::class)->findOneBy(['id' => $char->getProfession()]);
 
         return $this->render('test/index.html.twig', [
             'test' => isset($test) ? $test : "Brak obiektu test" 
