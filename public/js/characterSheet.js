@@ -11,3 +11,7 @@ function updateValue(input){
 }
 
 
+function validateCharacter(){
+    const btnSubmit = document.getElementById('character_submit');
+    btnSubmit.click();
+}
