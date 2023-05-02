@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Services\charactersService;
 use App\Entity\CharacterInfo;
 use Symfony\Component\Form\FormFactoryInterface;
-use App\Form\CharacterInfoType;
+use App\Form\CharacterType;
 use App\Repository\ProfessionRepository;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -49,14 +49,14 @@ class CharacterSheetController extends AbstractController
 
         
         
-        $formInfo = $this->createForm(CharacterInfoType::class, $character->getInfo());
+        $form = $this->createForm(CharacterType::class);
 
 
         
         return $this->render('character_sheet/index.html.twig', [
             'character' => $character,
             'edit' => $action==='edit'? true : false,
-            'formInfo' => $formInfo,
+            'formInfo' => $form,
 
         ]);
     }
