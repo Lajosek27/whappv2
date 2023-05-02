@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Character;
 use App\Entity\CharacterInfo;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,16 +11,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 
-class CharacterInfoType extends AbstractType
+class CharacterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('race',HiddenType::class,[
-                'label' => 'Rasa:', 
-                
-            ],
-                    
+                'label' => 'Rasa:',   
+            ],   
                 )
             ->add('age', HiddenType::class,[
                 'label' => 'Wiek:', 
@@ -44,10 +43,5 @@ class CharacterInfoType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
-    {
-        $resolver->setDefaults([
-            'data_class' => CharacterInfo::class,
-        ]);
-    }
+   
 }

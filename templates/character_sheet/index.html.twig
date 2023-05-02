@@ -25,7 +25,7 @@
                     <tbody>
                         <tr>
                             <td colspan="2"><label>Nazwa postaci:</label><span>{{character.name}}</span></td>
-                            <td><label>Rasa:</label><span id="character_info_race">{{character.info.race}}</span></td>
+                            <td><label>Rasa:</label><span id="character_race">{{character.info.race}}</span></td>
                             <td>
                                 <label>Klasa:</label>
                                 <span>
@@ -76,10 +76,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><label>Wiek:</label><span id="character_info_age">{{character.info.age}} lat</span></td>
-                            <td><label>Wzrost:</label><span id="character_info_height">{{character.info.height}} cm</span></td>
-                            <td><label>Włosy:</label><span id="character_info_hair">{{character.info.hair}}</span></td>
-                            <td><label>Oczy:</label><span id="character_info_eyes">{{character.info.eyes}}</span></td>
+                            <td><label>Wiek:</label><span id="character_age">{{character.info.age}} lat</span></td>
+                            <td><label>Wzrost:</label><span id="character_height">{{character.info.height}} cm</span></td>
+                            <td><label>Włosy:</label><span id="character_hair">{{character.info.hair}}</span></td>
+                            <td><label>Oczy:</label><span id="character_eyes">{{character.info.eyes}}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -93,27 +93,27 @@
                             <td>
                             <label>{{form_label(formInfo.race)}}</label>
                             <span>{{ form_widget(formInfo.race)}}</span>
-                            <span><input type="text" id="character_info_race_vis" class="form-control" value="{{character.info.race}}" onChange="updateValue(this)"></span>
+                            <span><input type="text" id="character_race_vis" class="form-control" value="{{character.info.race}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(formInfo.age)}}</label>
                             <span>{{ form_widget(formInfo.age)}}</span>
-                            <span><input type="number" id="character_info_age_vis" class="form-control" value="{{character.info.age}}" onChange="updateValue(this)"></span>
+                            <span><input type="number" id="character_age_vis" class="form-control" value="{{character.info.age}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(formInfo.height)}}</label>
                             <span>{{ form_widget(formInfo.height)}}</span>
-                            <span><input type="number" id="character_info_height_vis" class="form-control" value="{{character.info.height}}" onChange="updateValue(this)"></span>
+                            <span><input type="number" id="character_height_vis" class="form-control" value="{{character.info.height}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(formInfo.hair)}}</label>
                             <span>{{ form_widget(formInfo.hair)}}</span>
-                            <span><input type="text" id="character_info_hair_vis" class="form-control" value="{{character.info.hair}}" onChange="updateValue(this)"></span>
+                            <span><input type="text" id="character_hair_vis" class="form-control" value="{{character.info.hair}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(formInfo.eyes)}}</label>
                             <span>{{ form_widget(formInfo.eyes)}}</span>
-                            <span><input type="text" id="character_info_eyes_vis" class="form-control" value="{{character.info.eyes}}" onChange="updateValue(this)"></span>
+                            <span><input type="text" id="character_eyes_vis" class="form-control" value="{{character.info.eyes}}" onChange="updateValue(this)"></span>
                             </td>
                         </tr>
                     </tbody>
