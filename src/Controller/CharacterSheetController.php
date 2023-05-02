@@ -56,7 +56,7 @@ class CharacterSheetController extends AbstractController
         return $this->render('character_sheet/index.html.twig', [
             'character' => $character,
             'edit' => $action==='edit'? true : false,
-            'formInfo' => $form,
+            'form' => $form,
 
         ]);
     }
