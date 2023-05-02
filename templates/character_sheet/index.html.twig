@@ -11,13 +11,18 @@
      <div class="alert alert-succes">{{ succes }}</div>
     {% endfor %}
     <div id="characterSheet">
+        {% if edit %}
+            {{ form_start(form) }}
+        {% endif %}
         <div class="sheetSection">
+       
                 <div id="characterImg">
                     {# <div></div> #}
                 </div>
             </div>
         <div class="sheetSection characterInfo">
-            <div id="characterInfo"{% if edit %}
+            <div id="characterInfo"
+                {% if edit %}
                    class="" type="button" data-bs-toggle="collapse" data-bs-target="#characterInfoForm" aria-expanded="false" aria-controls="characterInfoForm"
                 {% endif %}
                 >
@@ -85,46 +90,46 @@
                 </table>
             </div>
              {% if edit %}
-            <div id="characterInfoForm" class="accordion-collapse collapse" aria-labelledby="characterInfo" >
-                {{ form_start(formInfo) }}
+            <div id="characterInfoForm" class="accordion-collapse collapse" aria-labelledby="characterInfo" data-bs-parent="#characterSheet">
+               
                  <table>
                     <tbody>
                         <tr>
                             <td>
-                            <label>{{form_label(formInfo.race)}}</label>
-                            <span>{{ form_widget(formInfo.race)}}</span>
+                            <label>{{form_label(form.race)}}</label>
+                            <span>{{ form_widget(form.race)}}</span>
                             <span><input type="text" id="character_race_vis" class="form-control" value="{{character.info.race}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
-                            <label>{{form_label(formInfo.age)}}</label>
-                            <span>{{ form_widget(formInfo.age)}}</span>
+                            <label>{{form_label(form.age)}}</label>
+                            <span>{{ form_widget(form.age)}}</span>
                             <span><input type="number" id="character_age_vis" class="form-control" value="{{character.info.age}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
-                            <label>{{form_label(formInfo.height)}}</label>
-                            <span>{{ form_widget(formInfo.height)}}</span>
+                            <label>{{form_label(form.height)}}</label>
+                            <span>{{ form_widget(form.height)}}</span>
                             <span><input type="number" id="character_height_vis" class="form-control" value="{{character.info.height}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
-                            <label>{{form_label(formInfo.hair)}}</label>
-                            <span>{{ form_widget(formInfo.hair)}}</span>
+                            <label>{{form_label(form.hair)}}</label>
+                            <span>{{ form_widget(form.hair)}}</span>
                             <span><input type="text" id="character_hair_vis" class="form-control" value="{{character.info.hair}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
-                            <label>{{form_label(formInfo.eyes)}}</label>
-                            <span>{{ form_widget(formInfo.eyes)}}</span>
+                            <label>{{form_label(form.eyes)}}</label>
+                            <span>{{ form_widget(form.eyes)}}</span>
                             <span><input type="text" id="character_eyes_vis" class="form-control" value="{{character.info.eyes}}" onChange="updateValue(this)"></span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                {{ form_end(formInfo) }}
+                
             </div>
              {% endif %}
         </div>
         <div class="sheetSection">
             <div id="characterAttributes">
-                <table class="clickable">
+                <table class=" {% if edit %} clickable {% else %}noclickable {% endif %}">
                     <tbody>
                         <tr>
                             <td colspan="12" class="text-center"><label>Cechy</label></td>
@@ -184,8 +189,12 @@
                     </tbody>
                 </table>
             </div>
-            <div id="characterPoints">
-                <table class="clickable">
+            <div id="characterPoints" 
+                {% if edit %}
+                   class="" type="button" data-bs-toggle="collapse" data-bs-target="#characterPointsForm" aria-expanded="false" aria-controls="characterPoints"
+                {% endif %}
+            >
+                <table class=" {% if edit %} clickable {% else %}noclickable {% endif %}">
                     <tbody>
                          <tr>
                             <td colspan="6" class="text-center"><label>Punkty Doświadczenia:</label><span>10000000</span></td>
@@ -212,10 +221,50 @@
                 </table>
             </div>
         </div>
+          {% if edit %}
+            <div id="characterPointsForm" class="accordion-collapse collapse" aria-labelledby="characterPoints" data-bs-parent="#characterSheet">
+               
+                 <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                            <label>{{form_label(form.fate)}}</label>
+                            <span>{{ form_widget(form.fate)}}</span>
+                            <span><input type="number" id="character_fate_vis" class="form-control" value="" onChange="updateValue(this)"></span>
+                            </td>
+                            <td>
+                            {# <label>{{form_label(form.age)}}</label>
+                            <span>{{ form_widget(form.age)}}</span> #}
+                            <span><input type="number" id="character_age_vis" class="form-control" value="{{character.info.age}}" onChange="updateValue(this)"></span>
+                            </td>
+                            <td>
+                            {# <label>{{form_label(form.height)}}</label>
+                            <span>{{ form_widget(form.height)}}</span> #}
+                            <span><input type="number" id="character_height_vis" class="form-control" value="{{character.info.height}}" onChange="updateValue(this)"></span>
+                            </td>
+                            <td>
+                            {# <label>{{form_label(form.hair)}}</label>
+                            <span>{{ form_widget(form.hair)}}</span> #}
+                            <span><input type="text" id="character_hair_vis" class="form-control" value="{{character.info.hair}}" onChange="updateValue(this)"></span>
+                            </td>
+                            <td>
+                            {# <label>{{form_label(form.eyes)}}</label>
+                            <span>{{ form_widget(form.eyes)}}</span> #}
+                            <span><input type="text" id="character_eyes_vis" class="form-control" value="{{character.info.eyes}}" onChange="updateValue(this)"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div>
+             {% endif %}
            {# <div class="accordion-item">
            <h2 class="accordion-header" id="item-head-0"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item-0" aria-expanded="false" aria-controls="item-0" data-dashlane-rid="f895bd2a3492c014" data-dashlane-label="true" data-form-type="">Aptekarz</button></h2>
            <div id="item-0" class="accordion-collapse collapse" aria-labelledby="item-head-0" data-bs-parent="#list" style="">
            <div class="accordion-body"><strong>Maksymana liczba rozwinięć: Bonus z Inteligencji</strong> <br><br> Możesz odwrócić kolejność kości nieudanego Testu Rzemiosła (Aptekarstwa), jeśli nowy wynik pozwoli ci odnieść sukces.</div> </div></div> #}
+     {% if edit %}
+          {{ form_end(form) }}
+        {% endif %}
     </div>
 
   

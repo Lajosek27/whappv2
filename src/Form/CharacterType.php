@@ -2,12 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\Character;
-use App\Entity\CharacterInfo;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 
@@ -37,6 +34,26 @@ class CharacterType extends AbstractType
             ])
             ->add('eyes',HiddenType::class,[
                 'label' => 'Oczy:', 
+                'required' => false,
+                
+            ])
+            ->add('fate',HiddenType::class,[
+                'label' => 'Punkty Przeznaczenia:', 
+                'required' => false,
+                
+            ])
+            ->add('resolve',HiddenType::class,[
+                'label' => 'Punkty Bohatera:', 
+                'required' => false,
+                
+            ])
+            ->add('luck',HiddenType::class,[
+                'label' => 'Punkty Szczęścia:', 
+                'required' => false,
+                
+            ])
+            ->add('resilience',HiddenType::class,[
+                'label' => 'Punkty Deterrminacji:', 
                 'required' => false,
                 
             ])
