@@ -38,6 +38,9 @@ class Character
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
     private ?int $professionLv = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Points $points = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +126,18 @@ class Character
     public function setProfessionLv(?int $professionLv): self
     {
         $this->professionLv = $professionLv;
+
+        return $this;
+    }
+
+    public function getPoints(): ?Points
+    {
+        return $this->points;
+    }
+
+    public function setPoints(?Points $points): self
+    {
+        $this->points = $points;
 
         return $this;
     }
