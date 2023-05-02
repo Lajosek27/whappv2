@@ -17,7 +17,7 @@
         <div class="sheetSection">
        
                 <div id="characterImg">
-                    {# <div></div> #}
+                    <div></div>
                 </div>
             </div>
         <div class="sheetSection characterInfo">
@@ -97,27 +97,27 @@
                         <tr>
                             <td>
                             <label>{{form_label(form.race)}}</label>
-                            <span>{{ form_widget(form.race)}}</span>
+                            <span>{{ form_widget(form.race , {'attr': {'value': character.info.race }})}}</span>
                             <span><input type="text" id="character_race_vis" class="form-control" value="{{character.info.race}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(form.age)}}</label>
-                            <span>{{ form_widget(form.age)}}</span>
+                            <span>{{ form_widget(form.age , {'attr': {'value': character.info.age }} )}}</span>
                             <span><input type="number" id="character_age_vis" class="form-control" value="{{character.info.age}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(form.height)}}</label>
-                            <span>{{ form_widget(form.height)}}</span>
+                            <span>{{ form_widget(form.height, {'attr': {'value': character.info.height }})}}</span>
                             <span><input type="number" id="character_height_vis" class="form-control" value="{{character.info.height}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(form.hair)}}</label>
-                            <span>{{ form_widget(form.hair)}}</span>
+                            <span>{{ form_widget(form.hair, {'attr': {'value': character.info.hair }})}}</span>
                             <span><input type="text" id="character_hair_vis" class="form-control" value="{{character.info.hair}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(form.eyes)}}</label>
-                            <span>{{ form_widget(form.eyes)}}</span>
+                            <span>{{ form_widget(form.eyes, {'attr': {'value': character.info.eyes }})}}</span>
                             <span><input type="text" id="character_eyes_vis" class="form-control" value="{{character.info.eyes}}" onChange="updateValue(this)"></span>
                             </td>
                         </tr>
@@ -229,23 +229,23 @@
                         <tr>
                             <td>
                                 <label>{{form_label(form.fate)}}</label>
-                                <span>{{ form_widget(form.fate)}}</span>
+                                <span>{{ form_widget(form.fate, {'attr': {'value': character.points.fate }})}}</span>
                                 <span><input type="number" id="character_fate_vis" class="form-control" value="{{character.points.fate}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                                 <label>{{form_label(form.luck)}}</label>
-                                <span>{{ form_widget(form.luck)}}</span>
+                                <span>{{ form_widget(form.luck, {'attr': {'value': character.points.luck }})}}</span>
                                 <span><input type="number" id="character_luck_vis" class="form-control" value="{{character.points.luck}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                                 <label>{{form_label(form.resolve)}}</label>
-                                <span>{{ form_widget(form.resolve)}}</span>
+                                <span>{{ form_widget(form.resolve, {'attr': {'value': character.points.resolve }})}}</span>
                                 <span><input type="number" id="character_resolve_vis" class="form-control" value="{{character.points.resolve}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                                 <label>{{form_label(form.resilience)}}</label>
-                                <span>{{ form_widget(form.resilience)}}</span>
-                                <span><input type="text" id="character_resilience_vis" class="form-control" value="{{character.points.resilience}}" onChange="updateValue(this)"></span>
+                                <span>{{ form_widget(form.resilience, {'attr': {'value': character.points.resilience }})}}</span>
+                                <span><input type="number" id="character_resilience_vis" class="form-control" value="{{character.points.resilience}}" onChange="updateValue(this)"></span>
                             </td>
                            
                         </tr>

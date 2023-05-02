@@ -56,19 +56,32 @@ class CharacterSheetController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // $this->addFlash('error', 'controller:' .  $form->get('race')->getData());
-            // $validation = $this->saveCharacter(
-            //     $form,
-            //     $character,
-            //     $manager
-            // );
-            $character->validate();
+
+            $info = $character->getInfo();
+            $info->setAge($form->get('age')->getData());
+            $info->setHeight($form->get('height')->getData());
+            $info->setHair($form->get('hair')->getData());
+            $info->setEyes($form->get('eyes')->getData());
+            $character->setInfo($info);
+
+            $points = $character->getPoints();
+            $points->setFate($form->get('fate')->getData());
+            $points->setLuck($form->get('luck')->getData());
+            $points->setResolve($form->get('resolve')->getData());
+            $points->setResilience($form->get('resilience')->getData());
+            $character->setPoints($points);
+            
+            $manager->persist($character);
+            $manager->flush();
+
+            $this->addFlash('succes','Zapisano zmiany :)');
         }
 
         
         return $this->render('character_sheet/index.html.twig', [
             'character' => $character,
             'edit' => $action==='edit'? true : false,
+            'gmMode' => $this->getuser() === $character->getGameMaster() ? true : false,
             'form' => $form,
 
         ]);
@@ -149,12 +162,6 @@ class CharacterSheetController extends AbstractController
         
         
         $info = $character->getInfo();
-        !empty($form->get('race')->getData()) ?  $info->setRace($form->get('race')->getData()) : '';
-        !empty($form->get('race')->getData()) ?  $info->setRace($form->get('race')->getData()) : '';
-        !empty($form->get('race')->getData()) ?  $info->setRace($form->get('race')->getData()) : '';
-        !empty($form->get('race')->getData()) ?  $info->setRace($form->get('race')->getData()) : '';
-        !empty($form->get('race')->getData()) ?  $info->setRace($form->get('race')->getData()) : '';
-
         $info->setAge($form->get('age')->getData());
         $info->setHeight($form->get('height')->getData());
         $info->setHair($form->get('hair')->getData());

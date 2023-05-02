@@ -3,11 +3,22 @@ function updateValue(input){
     let id = input.id.replace('_vis','')
     hidden = document.querySelector('input#'+id)
     span = document.querySelector('span#'+id)
+    debugger
+    switch(input.type)
+    {
+        case 'number':
+            hidden.value = input.value == '' ?  0 : input.value;
+            span.innerText = input.value;
+            break;
 
-    hidden.value = input.value;
-    span.innerText = input.value;
-    console.log(hidden)
-    console.log(span)
+        case 'text':
+            hidden.value = input.value == '' ?  'Brak' : input.value;
+            span.innerText = input.value;
+            break;
+    }
+    
+
+    
 }
 
 
