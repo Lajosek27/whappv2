@@ -10,7 +10,8 @@ use App\Entity\Points;
 use App\Entity\Character;
 use App\Entity\CharacterInfo;
 use App\Entity\Exp;
-
+use App\Entity\Attributes;
+use App\Entity\DevelopmentsAttributes;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 
@@ -71,6 +72,33 @@ class KurkilessFixtures extends Fixture implements DependentFixtureInterface
         $exp->setSpend(500);
         $character->setExp($exp);
 
+        
+        $attr = new Attributes();
+        $attr->setMaleWepons(33);
+        $attr->setRangeWepons(33);
+        $attr->setStrenght(33);
+        $attr->setResistance(33);
+        $attr->setInitiative(33);
+        $attr->setAgility(33);
+        $attr->setDexterity(33);
+        $attr->setIntelligency(33);
+        $attr->setWill(33);
+        $attr->setCharisma(33);
+        $character->setAttributes($attr);
+
+
+        $attrDev = new DevelopmentsAttributes();
+        $attrDev->setMaleWepons(2);
+        $attrDev->setRangeWepons(2);
+        $attrDev->setStrenght(2);
+        $attrDev->setResistance(2);
+        $attrDev->setInitiative(2);
+        $attrDev->setAgility(2);
+        $attrDev->setDexterity(2);
+        $attrDev->setIntelligency(2);
+        $attrDev->setWill(2);
+        $attrDev->setCharisma(2);
+        $character->setDevelopmentsAttributes($attrDev);
 
         $manager->persist($character);
         
@@ -108,6 +136,32 @@ class KurkilessFixtures extends Fixture implements DependentFixtureInterface
         $exp1->setSpend(500);
         $character1->setExp($exp1);
 
+        $attr1 = new Attributes();
+        $attr1->setMaleWepons(33);
+        $attr1->setRangeWepons(33);
+        $attr1->setStrenght(33);
+        $attr1->setResistance(33);
+        $attr1->setInitiative(33);
+        $attr1->setAgility(33);
+        $attr1->setDexterity(33);
+        $attr1->setIntelligency(33);
+        $attr1->setWill(33);
+        $attr1->setCharisma(33);
+        $character1->setAttributes($attr1);
+
+
+        $attrDev1 = new DevelopmentsAttributes();
+        $attrDev1->setMaleWepons(2);
+        $attrDev1->setRangeWepons(2);
+        $attrDev1->setStrenght(2);
+        $attrDev1->setResistance(2);
+        $attrDev1->setInitiative(2);
+        $attrDev1->setAgility(2);
+        $attrDev1->setDexterity(2);
+        $attrDev1->setIntelligency(2);
+        $attrDev1->setWill(2);
+        $attrDev1->setCharisma(2);
+        $character1->setDevelopmentsAttributes($attrDev1);
 
         $manager->persist($character1);
 

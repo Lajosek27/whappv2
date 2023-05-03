@@ -53,7 +53,7 @@ class DevelopmentsAttributes
         return $this->maleWepons;
     }
 
-    public function setMale(int $maleWepons): self
+    public function setMaleWepons(int $maleWepons): self
     {
         $this->maleWepons = $maleWepons;
 
