@@ -13,9 +13,7 @@ class Exp
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $current = null;
-
+   
     #[ORM\Column]
     private ?int $spend = null;
 
@@ -25,18 +23,6 @@ class Exp
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCurrent(): ?int
-    {
-        return $this->current;
-    }
-
-    public function setCurrent(int $current): self
-    {
-        $this->current = $current;
-
-        return $this;
     }
 
     public function getSpend(): ?int
