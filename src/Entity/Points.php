@@ -123,4 +123,47 @@ class Points
 
         return $this;
     }
+
+    public function normalize(): array
+    {
+        return array(
+            'fate' => $this->fate,
+            'luck' => $this->luck,
+            'resolve' => $this->resolve,
+            'resilience' => $this->resilience,
+            'speed' => $this->speed,
+            'walk' => $this->walk,
+            'run' => $this->run,
+           
+        );
+    }
+    public function denormalize($array): self
+    {   
+        
+    
+        if(array_key_exists('fate',$array)){
+            $this->fate = $array['fate'];
+        }
+        if(array_key_exists('luck',$array)){
+            $this->luck = $array['luck'];
+        }
+        if(array_key_exists('resolve',$array)){
+            $this->resolve = $array['resolve'];
+        }
+        if(array_key_exists('resilience',$array)){
+            $this->resilience = $array['resilience'];
+        }
+        if(array_key_exists('speed',$array)){
+            $this->speed = $array['speed'];
+        }
+        if(array_key_exists('walk',$array)){
+            $this->walk = $array['walk'];
+        }
+        if(array_key_exists('run',$array)){
+            $this->run = $array['run'];
+        }
+       
+
+       return $this;
+    }
 }

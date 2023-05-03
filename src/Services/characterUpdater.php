@@ -46,7 +46,12 @@ class characterUpdater
             $char->setInfo($info->denormalize($infoDifferences));
         }
 
-      
+        $points = $char->getPoints();
+        $pointsDifferences = $this->validatePoints($points,$data);
+        if(count($pointsDifferences) > 0)
+        {   
+            $char->setPoints($points->denormalize($pointsDifferences));
+        }
 
         
 
@@ -65,7 +70,7 @@ class characterUpdater
        foreach ($arrayInfo as $key => $value) {
             empty($value) ? $this->error('Musisz uzupełnić '.$key.'.'):'';
             if($value != $data[$key]){
-                $this->logger->info('Różni się: '.$key);
+                // $this->logger->info('Różni się: '.$key);
                 $differences[$key] = $data[$key];
             }
        }
@@ -73,6 +78,20 @@ class characterUpdater
        return $differences;
     }
 
+    private function validatePoints($points,$data) : array
+    {
+       $arrayPoints = $points->normalize();
+       $differences = [];
+
+       foreach ($arrayPoints as $key => $value) {
+            empty($value) ? $this->error('Musisz uzupełnić '.$key.'.'):'';
+            if($value != $data[$key]){
+                $differences[$key] = $data[$key];
+            }
+       }
+
+       return $differences;
+    }
 
     private function error(string $message)
     {
