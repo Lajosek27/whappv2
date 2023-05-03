@@ -105,9 +105,10 @@ class CharacterInfo
     }
     public function denormalize($array): self
     {   
-        
-            $this->race = $array['race'];
     
+        if(array_key_exists('race',$array)){
+            $this->race = $array['race'];
+        }
         if(array_key_exists('age',$array)){
             $this->age = $array['age'];
         }
