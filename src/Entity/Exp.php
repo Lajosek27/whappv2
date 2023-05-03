@@ -48,4 +48,23 @@ class Exp
 
         return $this;
     }
+    public function normalize(): array
+    {
+        return array(
+            'spend' => $this->spend,
+            'free' => $this->free,
+        );
+    }
+    public function denormalize($array): self
+    {   
+    
+        if(array_key_exists('spend',$array)){
+            $this->spend = $array['spend'];
+        }
+        if(array_key_exists('free',$array)){
+            $this->free = $array['free'];
+        }
+
+       return $this;
+    }
 }

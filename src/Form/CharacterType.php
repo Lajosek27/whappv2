@@ -73,12 +73,12 @@ class CharacterType extends AbstractType
                 
             ])
             ->add('spend',HiddenType::class,[
-                'label' => 'Wydany EXP:', 
+                'label' => 'Wydane:', 
                 'required' => false,
                 
             ])
             ->add('free',HiddenType::class,[
-                'label' => 'Wolny EXP:', 
+                'label' => 'Wolne:', 
                 'required' => false,
                 
             ])

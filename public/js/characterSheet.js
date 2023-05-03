@@ -16,8 +16,9 @@ function updateExp(){
     span = document.querySelector('span#exp_sum'),
     free = parseInt(document.querySelector('input#character_free').value),
     spend = parseInt(document.querySelector('input#character_spend').value),
-
+    front = document.querySelector('input#character_free_front')
     span.innerText = free + spend;
+    free.value = free;
     
 
     

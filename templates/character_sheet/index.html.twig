@@ -17,7 +17,7 @@
         <div class="sheetSection">
        
                 <div id="characterImg">
-                    <div>{{dump(dump)}}</div>
+                    {# <div>{{dump(dump)}}</div> #}
                 </div>
             </div>
         <div class="sheetSection characterInfo">
@@ -197,13 +197,13 @@
                 <table class=" {% if edit %} clickable {% else %}noclickable {% endif %}">
                     <tbody>
                          <tr>
-                            <td colspan="6" class="text-center"><label>Punkty Doświadczenia:</label><span id="exp_sum">
-                            {% set current = (character.exp.free|number_format) + (character.exp.spend|number_format) %}
-                            {{current}}
-                            </span></td>
+                            <td colspan="6" class="text-center"><label>Punkty Doświadczenia:</label><span id="exp_sum">{{currentExp}}</span></td>
                         </tr>
                          <tr>
-                            <td colspan="3"><label>Wolne:</label><span  id="character_free">{{ character.exp.free }}</span></td>
+                            <td colspan="3">
+                                <label>Wolne:</label><span  id="character_free">{{ character.exp.free }}</span>
+                                <input type="hidden" id="character_free_front" class="form-control" value="{{character.exp.free}}">
+                            </td>
                             <td colspan="3"><label>Wydane:</label><span  id="character_spend">{{ character.exp.spend }}</span></td>
                            
                         </tr>

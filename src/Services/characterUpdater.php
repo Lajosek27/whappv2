@@ -54,7 +54,15 @@ class characterUpdater
         }
 
         
-
+        
+        
+        
+        $exp = $char->getExp();
+        $expDifferences = $this->validatePoints($exp,$data);
+        if(count($expDifferences) > 0)
+        {   
+            $char->setExp($exp->denormalize($expDifferences));
+        }
 
         $this->manager->persist($char);
         $this->manager->flush();
@@ -93,22 +101,7 @@ class characterUpdater
        return $differences;
     }
 
-    private function error(string $message)
-    {
-        $session = $this->request->getSession();
-        $session->getFlashBag()->add('error', $message);
-
-    }
-    // public function changeEXP(Character $char) : bool
-    // {
-
-    //     $user = $this->security->getUser();
-    //     if(($char->getGameMaster() != Null && $char->getGameMaster() != $user) || ($char->getGameMaster() == Null && $char->getPlayer() != $user)){return false;}
-        
-    //     $exp = $char->getExp();
-    //     return true;
-    // }
-
+   
 }
 
 

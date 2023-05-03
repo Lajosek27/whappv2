@@ -98,7 +98,7 @@ class CharacterSheetController extends AbstractController
             'edit' => $action==='edit'? true : false,
             'gmMode' => $gmMode,
             'form' => $form,
-            'dump' => $dump
+            'currentExp' => (int) $character->getExp()->getFree() +  (int) $character->getExp()->getSpend()
 
         ]);
     }
@@ -169,8 +169,8 @@ class CharacterSheetController extends AbstractController
         return $this->render('character_sheet/customizing_profession.html.twig', [
             'character' => $character,
             'edit' => ($action==='edit' && $character->getGameMaster() !== $this->getUser())? true : false,
-            'form' => $form->createView()
-
+            'form' => $form->createView(),
+            
         ]);
     }
 
