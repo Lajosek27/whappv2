@@ -92,4 +92,36 @@ class CharacterInfo
 
         return $this;
     }
+
+    public function normalize(): array
+    {
+        return array(
+            'race' => $this->race,
+            'age' => $this->age,
+            'height' => $this->height,
+            'hair' => $this->hair,
+            'eyes' => $this->eyes,
+        );
+    }
+    public function denormalize($array): self
+    {   
+        
+            $this->race = $array['race'];
+    
+        if(array_key_exists('age',$array)){
+            $this->age = $array['age'];
+        }
+        if(array_key_exists('height',$array)){
+            $this->height = $array['height'];
+        }
+        if(array_key_exists('hair',$array)){
+            $this->hair = $array['hair'];
+        }
+        if(array_key_exists('eyes',$array)){
+            $this->eyes = $array['eyes'];
+        }
+       
+
+       return $this;
+    }
 }

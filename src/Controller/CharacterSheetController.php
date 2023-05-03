@@ -61,29 +61,29 @@ class CharacterSheetController extends AbstractController
         
         $form = $this->createForm(CharacterType::class);
 
-
+        $dump= '';
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $info = $character->getInfo();
-            $info->setAge($form->get('age')->getData());
-            $info->setHeight($form->get('height')->getData());
-            $info->setHair($form->get('hair')->getData());
-            $info->setEyes($form->get('eyes')->getData());
-            $character->setInfo($info);
+            // $info = $character->getInfo();
+            // $info->setAge($form->get('age')->getData());
+            // $info->setHeight($form->get('height')->getData());
+            // $info->setHair($form->get('hair')->getData());
+            // $info->setEyes($form->get('eyes')->getData());
+            // $character->setInfo($info);
 
-            $points = $character->getPoints();
-            $points->setFate($form->get('fate')->getData());
-            $points->setLuck($form->get('luck')->getData());
-            $points->setResolve($form->get('resolve')->getData());
-            $points->setResilience($form->get('resilience')->getData());
-            $points->setSpeed($form->get('speed')->getData());
-            $points->setWalk($form->get('walk')->getData());
-            $points->setRun($form->get('run')->getData());
-            $character->setPoints($points);
+            // $points = $character->getPoints();
+            // $points->setFate($form->get('fate')->getData());
+            // $points->setLuck($form->get('luck')->getData());
+            // $points->setResolve($form->get('resolve')->getData());
+            // $points->setResilience($form->get('resilience')->getData());
+            // $points->setSpeed($form->get('speed')->getData());
+            // $points->setWalk($form->get('walk')->getData());
+            // $points->setRun($form->get('run')->getData());
+            // $character->setPoints($points);
             
 
-            $characterUpdater->validateCharacter($character,$form->getData(),$gmMode,$logger);
+            $dump = $characterUpdater->validateCharacter($character,$form->getData(),$gmMode,$logger);
 
 
             $manager->persist($character);
@@ -98,6 +98,7 @@ class CharacterSheetController extends AbstractController
             'edit' => $action==='edit'? true : false,
             'gmMode' => $gmMode,
             'form' => $form,
+            'dump' => $dump
 
         ]);
     }
