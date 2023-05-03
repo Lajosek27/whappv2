@@ -72,6 +72,16 @@ class CharacterType extends AbstractType
                 'required' => false,
                 
             ])
+            ->add('spend',HiddenType::class,[
+                'label' => 'Wydane:', 
+                'required' => false,
+                
+            ])
+            ->add('free',HiddenType::class,[
+                'label' => 'Wolne:', 
+                'required' => false,
+                
+            ])
             ->add('submit',SubmitType::class, ['attr' => ['style' => 'display:none!important;']])
         ;
     }

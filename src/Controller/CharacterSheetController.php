@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Services\characterUpdater;
-
+use Psr\Log\LoggerInterface;
 
 
 class CharacterSheetController extends AbstractController
@@ -32,6 +32,7 @@ class CharacterSheetController extends AbstractController
         Request $request,
         EntityManagerInterface $manager,
         characterUpdater $characterUpdater,
+        LoggerInterface $logger,
         string $action='show',
         int $characterId = 0
         
@@ -56,33 +57,33 @@ class CharacterSheetController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        
+        $gmMode = $this->getuser() === $character->getGameMaster() ? true : false;
         
         $form = $this->createForm(CharacterType::class);
 
-
+        $dump= '';
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $info = $character->getInfo();
-            $info->setAge($form->get('age')->getData());
-            $info->setHeight($form->get('height')->getData());
-            $info->setHair($form->get('hair')->getData());
-            $info->setEyes($form->get('eyes')->getData());
-            $character->setInfo($info);
+            // $info = $character->getInfo();
+            // $info->setAge($form->get('age')->getData());
+            // $info->setHeight($form->get('height')->getData());
+            // $info->setHair($form->get('hair')->getData());
+            // $info->setEyes($form->get('eyes')->getData());
+            // $character->setInfo($info);
 
-            $points = $character->getPoints();
-            $points->setFate($form->get('fate')->getData());
-            $points->setLuck($form->get('luck')->getData());
-            $points->setResolve($form->get('resolve')->getData());
-            $points->setResilience($form->get('resilience')->getData());
-            $points->setSpeed($form->get('speed')->getData());
-            $points->setWalk($form->get('walk')->getData());
-            $points->setRun($form->get('run')->getData());
-            $character->setPoints($points);
+            // $points = $character->getPoints();
+            // $points->setFate($form->get('fate')->getData());
+            // $points->setLuck($form->get('luck')->getData());
+            // $points->setResolve($form->get('resolve')->getData());
+            // $points->setResilience($form->get('resilience')->getData());
+            // $points->setSpeed($form->get('speed')->getData());
+            // $points->setWalk($form->get('walk')->getData());
+            // $points->setRun($form->get('run')->getData());
+            // $character->setPoints($points);
             
 
-            
+            $dump = $characterUpdater->validateCharacter($character,$form->getData(),$gmMode,$logger);
 
 
             $manager->persist($character);
@@ -95,8 +96,9 @@ class CharacterSheetController extends AbstractController
         return $this->render('character_sheet/index.html.twig', [
             'character' => $character,
             'edit' => $action==='edit'? true : false,
-            'gmMode' => $this->getuser() === $character->getGameMaster() ? true : false,
+            'gmMode' => $gmMode,
             'form' => $form,
+            'currentExp' => (int) $character->getExp()->getFree() +  (int) $character->getExp()->getSpend()
 
         ]);
     }
@@ -167,8 +169,8 @@ class CharacterSheetController extends AbstractController
         return $this->render('character_sheet/customizing_profession.html.twig', [
             'character' => $character,
             'edit' => ($action==='edit' && $character->getGameMaster() !== $this->getUser())? true : false,
-            'form' => $form->createView()
-
+            'form' => $form->createView(),
+            
         ]);
     }
 

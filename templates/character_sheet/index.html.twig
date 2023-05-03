@@ -17,7 +17,7 @@
         <div class="sheetSection">
        
                 <div id="characterImg">
-                    <div></div>
+                    {# <div>{{dump(dump)}}</div> #}
                 </div>
             </div>
         <div class="sheetSection characterInfo">
@@ -193,15 +193,18 @@
                 {% if edit %}
                    class="" type="button" data-bs-toggle="collapse" data-bs-target="#characterPointsForm" aria-expanded="false" aria-controls="characterPoints"
                 {% endif %}
-            >
+            >   
                 <table class=" {% if edit %} clickable {% else %}noclickable {% endif %}">
                     <tbody>
                          <tr>
-                            <td colspan="6" class="text-center"><label>Punkty Doświadczenia:</label><span>10000000</span></td>
+                            <td colspan="6" class="text-center"><label>Punkty Doświadczenia:</label><span id="exp_sum">{{currentExp}}</span></td>
                         </tr>
                          <tr>
-                            <td colspan="3"><label>Wolne:</label><span>12220</span></td>
-                            <td colspan="3"><label>Wydane:</label><span>10000</span></td>
+                            <td colspan="3">
+                                <label>Wolne:</label><span  id="character_free">{{ character.exp.free }}</span>
+                                <input type="hidden" id="character_free_front" class="form-control" value="{{character.exp.free}}">
+                            </td>
+                            <td colspan="3"><label>Wydane:</label><span  id="character_spend">{{ character.exp.spend }}</span></td>
                            
                         </tr>
                         <tr>
@@ -223,7 +226,28 @@
         </div>
           {% if edit %}
             <div id="characterPointsForm" class="accordion-collapse collapse" aria-labelledby="characterPoints" data-bs-parent="#characterSheet">
-               
+                {% if gmMode %}
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="text-center"><label>Punkty Doświadczenia</label></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>{{form_label(form.spend)}}</label>
+                                <span>{{ form_widget(form.spend, {'attr': {'value': character.exp.spend }})}}</span>
+                                <span><input type="number" id="character_spend_vis" class="form-control" value="{{character.exp.spend}}" onChange="updateValue(this);updateExp()"></span>
+                            </td>
+                            <td>
+                                <label>{{form_label(form.free)}}</label>
+                                <span>{{ form_widget(form.free, {'attr': {'value': character.exp.free }})}}</span>
+                                <span><input type="number" id="character_free_vis" class="form-control" value="{{character.exp.free}}" onChange="updateValue(this);updateExp()"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+                
                  <table>
                     <tbody>
                         <tr>

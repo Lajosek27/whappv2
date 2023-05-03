@@ -3,24 +3,26 @@ function updateValue(input){
     let id = input.id.replace('_vis','')
     hidden = document.querySelector('input#'+id)
     span = document.querySelector('span#'+id)
-    debugger
-    switch(input.type)
-    {
-        case 'number':
-            hidden.value = input.value == '' ?  0 : input.value;
-            span.innerText = input.value;
-            break;
 
-        case 'text':
-            hidden.value = input.value == '' ?  'Brak' : input.value;
-            span.innerText = input.value;
-            break;
-    }
-    
+
+    hidden.value = input.value == '' ?  0 : input.value;
+    span.innerText =  input.value == '' ?  0 : input.value;
+            
 
     
 }
 
+function updateExp(){
+    span = document.querySelector('span#exp_sum'),
+    free = parseInt(document.querySelector('input#character_free').value),
+    spend = parseInt(document.querySelector('input#character_spend').value),
+    front = document.querySelector('input#character_free_front')
+    span.innerText = free + spend;
+    free.value = free;
+    
+
+    
+}
 
 function validateCharacter(){
     const btnSubmit = document.getElementById('character_submit');

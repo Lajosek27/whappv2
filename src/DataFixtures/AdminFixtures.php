@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Entity\Character;
 use App\Entity\CharacterInfo;
 use App\Entity\Points;
+use App\Entity\Exp;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 
@@ -71,6 +72,13 @@ class AdminFixtures extends Fixture implements DependentFixtureInterface
         $points->setRun(16);
         $character->setPoints($points);
         
+        $exp = new Exp();
+        $exp->setFree(500);
+        $exp->setSpend(500);
+        $character->setExp($exp);
+
+
+
         $character1= new Character();
         $character1->setName('Nebur');
         $character1->setIsPrivate(false);
@@ -99,7 +107,10 @@ class AdminFixtures extends Fixture implements DependentFixtureInterface
         $points1->setRun(16);
         $character1->setPoints($points1);
         
-
+        $exp1 = new Exp();
+        $exp1->setFree(500);
+        $exp1->setSpend(500);
+        $character1->setExp($exp1);
 
 
 
