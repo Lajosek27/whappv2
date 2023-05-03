@@ -2,23 +2,24 @@
 
 namespace App\Controller;
 
-use App\Entity\Character;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Services\charactersService;
-use App\Entity\CharacterInfo;
 use Symfony\Component\Form\FormFactoryInterface;
 use App\Form\CharacterType;
-use App\Repository\ProfessionRepository;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Services\characterUpdater;
+
+
 
 class CharacterSheetController extends AbstractController
-{
+{   
+    
     #[Route(
         '/character/sheet/{characterId}/{action}',
          name: 'app_character_sheet',
@@ -26,7 +27,15 @@ class CharacterSheetController extends AbstractController
             'characterId' => '\d+',
             'action' =>'show|edit'
             ])]
-    public function index(charactersService $characterGetter,Request $request,EntityManagerInterface $manager,string $action='show',int $characterId = 0): Response
+    public function index(
+        charactersService $characterGetter,
+        Request $request,
+        EntityManagerInterface $manager,
+        characterUpdater $characterUpdater,
+        string $action='show',
+        int $characterId = 0
+        
+    ): Response
     {
         if(!$this->getUser())
         {   
@@ -52,10 +61,41 @@ class CharacterSheetController extends AbstractController
         $form = $this->createForm(CharacterType::class);
 
 
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $info = $character->getInfo();
+            $info->setAge($form->get('age')->getData());
+            $info->setHeight($form->get('height')->getData());
+            $info->setHair($form->get('hair')->getData());
+            $info->setEyes($form->get('eyes')->getData());
+            $character->setInfo($info);
+
+            $points = $character->getPoints();
+            $points->setFate($form->get('fate')->getData());
+            $points->setLuck($form->get('luck')->getData());
+            $points->setResolve($form->get('resolve')->getData());
+            $points->setResilience($form->get('resilience')->getData());
+            $points->setSpeed($form->get('speed')->getData());
+            $points->setWalk($form->get('walk')->getData());
+            $points->setRun($form->get('run')->getData());
+            $character->setPoints($points);
+            
+
+            
+
+
+            $manager->persist($character);
+            $manager->flush();
+
+            $this->addFlash('succes','Zapisano zmiany :)');
+        }
+
         
         return $this->render('character_sheet/index.html.twig', [
             'character' => $character,
             'edit' => $action==='edit'? true : false,
+            'gmMode' => $this->getuser() === $character->getGameMaster() ? true : false,
             'form' => $form,
 
         ]);
@@ -132,5 +172,5 @@ class CharacterSheetController extends AbstractController
         ]);
     }
 
-    
+  
 }

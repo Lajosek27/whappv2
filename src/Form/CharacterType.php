@@ -6,7 +6,7 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class CharacterType extends AbstractType
 {
@@ -57,6 +57,22 @@ class CharacterType extends AbstractType
                 'required' => false,
                 
             ])
+            ->add('speed',HiddenType::class,[
+                'label' => 'Szybkość:', 
+                'required' => false,
+                
+            ])
+            ->add('walk',HiddenType::class,[
+                'label' => 'Chód:', 
+                'required' => false,
+                
+            ])
+            ->add('run',HiddenType::class,[
+                'label' => 'Bieg:', 
+                'required' => false,
+                
+            ])
+            ->add('submit',SubmitType::class, ['attr' => ['style' => 'display:none!important;']])
         ;
     }
 

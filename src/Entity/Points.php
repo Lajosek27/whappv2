@@ -26,6 +26,15 @@ class Points
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $resilience = null;
 
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $speed = null;
+
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $walk = null;
+
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $run = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +84,42 @@ class Points
     public function setResilience(int $resilience): self
     {
         $this->resilience = $resilience;
+
+        return $this;
+    }
+
+    public function getSpeed(): ?int
+    {
+        return $this->speed;
+    }
+
+    public function setSpeed(int $speed): self
+    {
+        $this->speed = $speed;
+
+        return $this;
+    }
+
+    public function getWalk(): ?int
+    {
+        return $this->walk;
+    }
+
+    public function setWalk(int $walk): self
+    {
+        $this->walk = $walk;
+
+        return $this;
+    }
+
+    public function getRun(): ?int
+    {
+        return $this->run;
+    }
+
+    public function setRun(int $run): self
+    {
+        $this->run = $run;
 
         return $this;
     }

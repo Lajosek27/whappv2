@@ -472,6 +472,7 @@ footer .footer{
     background-color: var(--background-secound);
     padding: 20px;
     border-radius: 30px;
+    margin-bottom: 100px;
 }
 #characterSheet .sheetSection {
     margin-bottom: 20px;

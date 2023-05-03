@@ -17,7 +17,7 @@
         <div class="sheetSection">
        
                 <div id="characterImg">
-                    {# <div></div> #}
+                    <div></div>
                 </div>
             </div>
         <div class="sheetSection characterInfo">
@@ -97,27 +97,27 @@
                         <tr>
                             <td>
                             <label>{{form_label(form.race)}}</label>
-                            <span>{{ form_widget(form.race)}}</span>
+                            <span>{{ form_widget(form.race , {'attr': {'value': character.info.race }})}}</span>
                             <span><input type="text" id="character_race_vis" class="form-control" value="{{character.info.race}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(form.age)}}</label>
-                            <span>{{ form_widget(form.age)}}</span>
+                            <span>{{ form_widget(form.age , {'attr': {'value': character.info.age }} )}}</span>
                             <span><input type="number" id="character_age_vis" class="form-control" value="{{character.info.age}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(form.height)}}</label>
-                            <span>{{ form_widget(form.height)}}</span>
+                            <span>{{ form_widget(form.height, {'attr': {'value': character.info.height }})}}</span>
                             <span><input type="number" id="character_height_vis" class="form-control" value="{{character.info.height}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(form.hair)}}</label>
-                            <span>{{ form_widget(form.hair)}}</span>
+                            <span>{{ form_widget(form.hair, {'attr': {'value': character.info.hair }})}}</span>
                             <span><input type="text" id="character_hair_vis" class="form-control" value="{{character.info.hair}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
                             <label>{{form_label(form.eyes)}}</label>
-                            <span>{{ form_widget(form.eyes)}}</span>
+                            <span>{{ form_widget(form.eyes, {'attr': {'value': character.info.eyes }})}}</span>
                             <span><input type="text" id="character_eyes_vis" class="form-control" value="{{character.info.eyes}}" onChange="updateValue(this)"></span>
                             </td>
                         </tr>
@@ -205,17 +205,17 @@
                            
                         </tr>
                         <tr>
-                            <td colspan="3"><label>Punkty Bohatera:</label><span>2</span></td>
-                            <td colspan="3"><label>Punkty Determinacji:</label><span>2</span></td>
+                            <td colspan="3"><label>Punkty Bohatera:</label><span id="character_resolve">{{character.points.resolve}}</span></td>
+                            <td colspan="3"><label>Punkty Determinacji:</label><span id="character_resilience">{{character.points.resilience}}</span></td>
                         </tr>
                         <tr>
-                            <td colspan="3"><label>Punkty Przeznaczenia:</label><span>2</span></td>
-                            <td colspan="3"><label>Punkty Szczęścia:</label><span>2</span></td>
+                            <td colspan="3"><label>Punkty Przeznaczenia:</label><span id="character_fate">{{character.points.fate}}</span></td>
+                            <td colspan="3"><label>Punkty Szczęścia:</label><span id="character_luck">{{character.points.luck}}</span></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><label>Szybkość:</label><span>2</span></td>
-                            <td colspan="2"><label>Chód:</label><span>x2</span></td>
-                            <td colspan="2"><label>Bieg:</label><span>x4</span></td>
+                            <td colspan="2"><label>Szybkość:</label><span id="character_speed">{{character.points.speed}}</span></td>
+                            <td colspan="2"><label>Chód:</label><span id="character_walk">{{character.points.walk}}</span></td>
+                            <td colspan="2"><label>Bieg:</label><span id="character_run">{{character.points.run}}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -228,29 +228,43 @@
                     <tbody>
                         <tr>
                             <td>
-                            <label>{{form_label(form.fate)}}</label>
-                            <span>{{ form_widget(form.fate)}}</span>
-                            <span><input type="number" id="character_fate_vis" class="form-control" value="" onChange="updateValue(this)"></span>
+                                <label>{{form_label(form.fate)}}</label>
+                                <span>{{ form_widget(form.fate, {'attr': {'value': character.points.fate }})}}</span>
+                                <span><input type="number" id="character_fate_vis" class="form-control" value="{{character.points.fate}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
-                            {# <label>{{form_label(form.age)}}</label>
-                            <span>{{ form_widget(form.age)}}</span> #}
-                            <span><input type="number" id="character_age_vis" class="form-control" value="{{character.info.age}}" onChange="updateValue(this)"></span>
+                                <label>{{form_label(form.luck)}}</label>
+                                <span>{{ form_widget(form.luck, {'attr': {'value': character.points.luck }})}}</span>
+                                <span><input type="number" id="character_luck_vis" class="form-control" value="{{character.points.luck}}" onChange="updateValue(this)"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                             <td>
+                                <label>{{form_label(form.resolve)}}</label>
+                                <span>{{ form_widget(form.resolve, {'attr': {'value': character.points.resolve }})}}</span>
+                                <span><input type="number" id="character_resolve_vis" class="form-control" value="{{character.points.resolve}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
-                            {# <label>{{form_label(form.height)}}</label>
-                            <span>{{ form_widget(form.height)}}</span> #}
-                            <span><input type="number" id="character_height_vis" class="form-control" value="{{character.info.height}}" onChange="updateValue(this)"></span>
+                                <label>{{form_label(form.resilience)}}</label>
+                                <span>{{ form_widget(form.resilience, {'attr': {'value': character.points.resilience }})}}</span>
+                                <span><input type="number" id="character_resilience_vis" class="form-control" value="{{character.points.resilience}}" onChange="updateValue(this)"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>{{form_label(form.speed)}}</label>
+                                <span>{{ form_widget(form.speed, {'attr': {'value': character.points.speed }})}}</span>
+                                <span><input type="number" id="character_speed_vis" class="form-control" value="{{character.points.speed}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
-                            {# <label>{{form_label(form.hair)}}</label>
-                            <span>{{ form_widget(form.hair)}}</span> #}
-                            <span><input type="text" id="character_hair_vis" class="form-control" value="{{character.info.hair}}" onChange="updateValue(this)"></span>
+                                <label>{{form_label(form.walk)}}</label>
+                                <span>{{ form_widget(form.walk, {'attr': {'value': character.points.walk }})}}</span>
+                                <span><input type="number" id="character_walk_vis" class="form-control" value="{{character.points.walk}}" onChange="updateValue(this)"></span>
                             </td>
                             <td>
-                            {# <label>{{form_label(form.eyes)}}</label>
-                            <span>{{ form_widget(form.eyes)}}</span> #}
-                            <span><input type="text" id="character_eyes_vis" class="form-control" value="{{character.info.eyes}}" onChange="updateValue(this)"></span>
+                                <label>{{form_label(form.run)}}</label>
+                                <span>{{ form_widget(form.run, {'attr': {'value': character.points.run }})}}</span>
+                                <span><input type="number" id="character_run_vis" class="form-control" value="{{character.points.run}}" onChange="updateValue(this)"></span>
                             </td>
                         </tr>
                     </tbody>
@@ -258,16 +272,106 @@
                 
             </div>
              {% endif %}
-           {# <div class="accordion-item">
-           <h2 class="accordion-header" id="item-head-0"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item-0" aria-expanded="false" aria-controls="item-0" data-dashlane-rid="f895bd2a3492c014" data-dashlane-label="true" data-form-type="">Aptekarz</button></h2>
-           <div id="item-0" class="accordion-collapse collapse" aria-labelledby="item-head-0" data-bs-parent="#list" style="">
-           <div class="accordion-body"><strong>Maksymana liczba rozwinięć: Bonus z Inteligencji</strong> <br><br> Możesz odwrócić kolejność kości nieudanego Testu Rzemiosła (Aptekarstwa), jeśli nowy wynik pozwoli ci odnieść sukces.</div> </div></div> #}
-     {% if edit %}
-          {{ form_end(form) }}
-        {% endif %}
+            <div class="sheetSection">
+            <div id="characterAttributes">
+                <table class=" {% if edit %} clickable {% else %}noclickable {% endif %}">
+                    <tbody>
+                        <tr>
+                            <td colspan="12" class="text-center"><label>Cechy</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><label></label></td>
+                           <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                         <tr>
+                            <td colspan="2"><label>Początkowa</label></td>
+                            <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                         <tr>
+                            <td colspan="2"><label>Rozwinięcia</label></td>
+                            <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                         <tr>
+                            <td colspan="2"><label>Aktualna</label></td>
+                            <td><span>WW</span></td>
+                            <td><span>US</span></td>
+                            <td><span>S</span></td>
+                            <td><span>Wt</span></td>
+                            <td><span>I</span></td>
+                            <td><span>Zw</span></td>
+                            <td><span>Zr</span></td>
+                            <td><span>Int</span></td>
+                            <td><span>SW</span></td>
+                            <td><span>Ogł</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="characterPoints" 
+                {% if edit %}
+                   class="" type="button" data-bs-toggle="collapse" data-bs-target="#characterPointsForm" aria-expanded="false" aria-controls="characterPoints"
+                {% endif %}
+            >
+                <table class=" {% if edit %} clickable {% else %}noclickable {% endif %}">
+                    <tbody>
+                         <tr>
+                            <td colspan="6" class="text-center"><label>Punkty Doświadczenia:</label><span>10000000</span></td>
+                        </tr>
+                         <tr>
+                            <td colspan="3"><label>Wolne:</label><span>12220</span></td>
+                            <td colspan="3"><label>Wydane:</label><span>10000</span></td>
+                           
+                        </tr>
+                        <tr>
+                            <td colspan="3"><label>Punkty Bohatera:</label><span id="character_resolve">{{character.points.resolve}}</span></td>
+                            <td colspan="3"><label>Punkty Determinacji:</label><span id="character_resilience">{{character.points.resilience}}</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><label>Punkty Przeznaczenia:</label><span id="character_fate">{{character.points.fate}}</span></td>
+                            <td colspan="3"><label>Punkty Szczęścia:</label><span id="character_luck">{{character.points.luck}}</span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><label>Szybkość:</label><span id="character_speed">{{character.points.speed}}</span></td>
+                            <td colspan="2"><label>Chód:</label><span id="character_walk">{{character.points.walk}}</span></td>
+                            <td colspan="2"><label>Bieg:</label><span id="character_run">{{character.points.run}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-  
+    {% if edit %}
+        {{ form_widget(form.submit)}}
+        {{ form_end(form) }}
+    {% endif %}
 </div>
 {% endblock %}
 
@@ -276,8 +380,8 @@
         <footer>
             <div class="container-lg footer">
                 <div class="rightButtons">
-                    <button type="submit" class="btn btn-primary">Zapisz(ale jeszcze nie działa)</button>
-                    <a href="{{ path('app_character_sheet',{'characterId' : character.id, 'action' : 'edit'}) }}"><button type="submit" class="btn btn-primary">Reset(działam ;))</button></a>
+                    <button type="submit" class="btn btn-primary" onClick="validateCharacter()">Zapisz</button>
+                    <a href="{{ path('app_character_sheet',{'characterId' : character.id, 'action' : 'edit'}) }}"><button type="submit" class="btn btn-primary">Reset</button></a>
                 </div>
                 <div class="leftButtons">
                     {% if character.profession %}<a href="{{ path('app_customizing_profession',{ 'characterId' : character.id }) }}"><button type="submit" class="btn btn-primary">Profejsa</button></a>{% endif %}
