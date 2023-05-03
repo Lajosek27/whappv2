@@ -44,6 +44,13 @@ class Character
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Exp $exp = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Attributes $attributes = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?developmentsAttributes $developmentsAttributes = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -153,6 +160,30 @@ class Character
     public function setExp(?Exp $exp): self
     {
         $this->exp = $exp;
+
+        return $this;
+    }
+
+    public function getAttributes(): ?Attributes
+    {
+        return $this->attributes;
+    }
+
+    public function setAttributes(?Attributes $attributes): self
+    {
+        $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    public function getDevelopmentsAttributes(): ?developmentsAttributes
+    {
+        return $this->developmentsAttributes;
+    }
+
+    public function setDevelopmentsAttributes(developmentsAttributes $developmentsAttributes): self
+    {
+        $this->developmentsAttributes = $developmentsAttributes;
 
         return $this;
     }
