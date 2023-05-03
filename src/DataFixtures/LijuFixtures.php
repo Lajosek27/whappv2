@@ -60,6 +60,9 @@ class LijuFixtures extends Fixture implements DependentFixtureInterface
         $points->setResolve(3);
         $points->setResilience(2);
         $points->setLuck(3);
+        $points->setSpeed(4);
+        $points->setWalk(8);
+        $points->setRun(16);
         $character->setPoints($points);
 
         $manager->persist($character);
@@ -88,6 +91,9 @@ class LijuFixtures extends Fixture implements DependentFixtureInterface
         $points1->setResolve(3);
         $points1->setResilience(2);
         $points1->setLuck(3);
+        $points1->setSpeed(4);
+        $points1->setWalk(8);
+        $points1->setRun(16);
         $character1->setPoints($points1);
 
         $manager->persist($character1);

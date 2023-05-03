@@ -57,6 +57,21 @@ class CharacterType extends AbstractType
                 'required' => false,
                 
             ])
+            ->add('speed',HiddenType::class,[
+                'label' => 'Szybkość:', 
+                'required' => false,
+                
+            ])
+            ->add('walk',HiddenType::class,[
+                'label' => 'Chód:', 
+                'required' => false,
+                
+            ])
+            ->add('run',HiddenType::class,[
+                'label' => 'Bieg:', 
+                'required' => false,
+                
+            ])
             ->add('submit',SubmitType::class, ['attr' => ['style' => 'display:none!important;']])
         ;
     }
