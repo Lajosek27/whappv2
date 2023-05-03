@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Services\characterUpdater;
-
+use Psr\Log\LoggerInterface;
 
 
 class CharacterSheetController extends AbstractController
@@ -32,6 +32,7 @@ class CharacterSheetController extends AbstractController
         Request $request,
         EntityManagerInterface $manager,
         characterUpdater $characterUpdater,
+        LoggerInterface $logger,
         string $action='show',
         int $characterId = 0
         
@@ -56,7 +57,7 @@ class CharacterSheetController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        
+        $gmMode = $this->getuser() === $character->getGameMaster() ? true : false;
         
         $form = $this->createForm(CharacterType::class);
 
@@ -82,7 +83,7 @@ class CharacterSheetController extends AbstractController
             $character->setPoints($points);
             
 
-            
+            $characterUpdater->validateCharacter($character,$form->getData(),$gmMode,$logger);
 
 
             $manager->persist($character);
@@ -95,7 +96,7 @@ class CharacterSheetController extends AbstractController
         return $this->render('character_sheet/index.html.twig', [
             'character' => $character,
             'edit' => $action==='edit'? true : false,
-            'gmMode' => $this->getuser() === $character->getGameMaster() ? true : false,
+            'gmMode' => $gmMode,
             'form' => $form,
 
         ]);

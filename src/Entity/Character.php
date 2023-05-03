@@ -41,6 +41,9 @@ class Character
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Points $points = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Exp $exp = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -138,6 +141,18 @@ class Character
     public function setPoints(?Points $points): self
     {
         $this->points = $points;
+
+        return $this;
+    }
+
+    public function getExp(): ?Exp
+    {
+        return $this->exp;
+    }
+
+    public function setExp(?Exp $exp): self
+    {
+        $this->exp = $exp;
 
         return $this;
     }
