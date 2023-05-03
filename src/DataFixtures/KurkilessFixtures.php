@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Entity\Points;
 use App\Entity\Character;
 use App\Entity\CharacterInfo;
+use App\Entity\Exp;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
@@ -65,6 +66,12 @@ class KurkilessFixtures extends Fixture implements DependentFixtureInterface
         $points->setRun(16);
         $character->setPoints($points);
 
+        $exp = new Exp();
+        $exp->setFree(500);
+        $exp->setSpend(500);
+        $character->setExp($exp);
+
+
         $manager->persist($character);
         
         $character1= new Character();
@@ -95,6 +102,12 @@ class KurkilessFixtures extends Fixture implements DependentFixtureInterface
         $points1->setWalk(8);
         $points1->setRun(16);
         $character1->setPoints($points1);
+
+        $exp1 = new Exp();
+        $exp1->setFree(500);
+        $exp1->setSpend(500);
+        $character1->setExp($exp1);
+
 
         $manager->persist($character1);
 
